@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Corporate &amp; Brand Activations — block</title>
+<!--
+  WIX EMBED BLOCK — Corporate & Brand Activations  (v2 — photo + logo led)
+  ========================================================================
+  Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
+  Heights are noted at the bottom of this comment.
+
+  ── SWAPPING IN YOUR OWN PHOTOS ─────────────────────────────────────────
+  Every image below is pulled from your existing Wix media library, so this
+  works as-is today. To use the press-kit shots instead:
+    1. Wix > Media Manager > upload the photo
+    2. Click it > "Copy URL"  (gives you a static.wixstatic.com link)
+    3. Find the matching  data-slot="..."  below and replace its src
+  Slots, in order:
+    hero            big opening photo          — want: her working a daytime/corporate room
+    video-poster    video thumbnail            — want: 49ers halftime or a stadium clip
+    work-1..4       four credit photos
+    booth           photo booth / activation   — want: the booth set up at an event
+
+  ── TURNING ON THE VIDEO ────────────────────────────────────────────────
+  Put a YouTube ID in YT_ID below (the part after v=). The poster image then
+  becomes a real player on click. Leave it empty and the poster links out instead.
+
+  ── STILL TO CONFIRM ────────────────────────────────────────────────────
+  Lighting type · booth branding · 49ers season/date · travel radius · testimonials
+
+  ── HEIGHT ──────────────────────────────────────────────────────────────
+  Measured: 4312px at 1200px wide · 5177px at 400px wide.
+  Set the Wix element to 4400px desktop and 5300px mobile (slack for font loading).
+  Every photo you swap in changes this — re-check after swapping.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  :root{
+    --ink:#120E16; --muted:#5B5266; --line:#E4DEEA;
+    --paper:#FFFFFF; --alt:#F7F4FA;
+    --violet:#7A21C9; --violet-ink:#5C169B; --violet-lite:#B36BF0; --violet-soft:#F2E9FB;
+    --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+    --serif:'Instrument Serif',Georgia,serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--display);
+    font-weight:500;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  h2,h3,h4{margin:0;text-wrap:balance;}
+  p{margin:0;}
+  .eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--violet);}
+  .wrap{max-width:1140px;margin:0 auto;padding-inline:22px;}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;}
+
+  /* ── HERO ─────────────────────────────────────────── */
+  .hero{position:relative;background:var(--ink);color:#fff;overflow:hidden;}
+  .hero-img{position:absolute;inset:0;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 28%;
+    opacity:.46;filter:saturate(.85);}
+  .hero-grad{position:absolute;inset:0;
+    background:linear-gradient(105deg,rgba(18,14,22,.94) 0%,rgba(18,14,22,.78) 44%,rgba(18,14,22,.34) 100%);}
+  .hero-in{position:relative;padding-block:74px 68px;display:flex;flex-direction:column;
+    gap:20px;max-width:46ch;}
+  .hero h2{font-size:clamp(34px,5.6vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1;}
+  .hero h2 .serif{color:var(--violet-lite);}
+  .hero p{font-size:clamp(16px,1.9vw,19px);color:#CFC4DA;max-width:48ch;}
+  .hero-svcs{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
+  .hero-svcs span{font-size:11.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:7px 14px;color:#EDE6F3;}
+
+  /* ── SECTION SHELL ────────────────────────────────── */
+  section{padding-block:60px;}
+  section.tint{background:var(--alt);}
+  .sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:30px;max-width:60ch;}
+  .sec-head h3{font-size:clamp(24px,3.3vw,34px);font-weight:800;letter-spacing:-.025em;line-height:1.08;}
+  .sec-head p{color:var(--muted);font-size:16.5px;}
+
+  /* ── LOGO WALL ────────────────────────────────────── */
+  .logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);border-radius:5px;overflow:hidden;}
+  .logos div{background:var(--paper);height:96px;display:flex;align-items:center;
+    justify-content:center;padding:18px 20px;}
+  .logos img{max-height:100%;max-width:100%;width:auto;object-fit:contain;
+    filter:grayscale(1) contrast(.85) brightness(.55);opacity:.72;
+    transition:filter .2s ease,opacity .2s ease;}
+  .logos div:hover img{filter:none;opacity:1;}
+
+  /* ── SERVICES ─────────────────────────────────────── */
+  .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;}
+  .svc article{background:var(--paper);border:1px solid var(--line);border-radius:5px;
+    padding:20px 19px 22px;display:flex;flex-direction:column;gap:8px;min-width:0;}
+  .svc h4{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--violet-ink);}
+  .svc p{font-size:14.5px;color:var(--muted);line-height:1.5;}
+  .svc article.wide{grid-column:1/-1;background:var(--violet-soft);border-color:#DCC4F2;
+    flex-direction:row;gap:18px;align-items:stretch;}
+  .svc article.wide .txt{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1;}
+  .svc article.wide .shot{width:38%;max-width:420px;flex-shrink:0;border-radius:4px;overflow:hidden;
+    background:#E3D4F2;}
+  .svc article.wide .shot img{width:100%;height:100%;object-fit:cover;min-height:150px;}
+  @media (max-width:700px){
+    .svc article.wide{flex-direction:column;}
+    .svc article.wide .shot{width:100%;}
+  }
+
+  /* ── BUNDLE BAND ──────────────────────────────────── */
+  .bundle{background:var(--ink);color:#fff;}
+  .bundle .wrap{padding-block:52px;display:flex;flex-wrap:wrap;align-items:center;
+    justify-content:space-between;gap:28px;}
+  .bundle .txt{display:flex;flex-direction:column;gap:12px;max-width:60ch;min-width:0;}
+  .bundle h3{font-size:clamp(23px,3.2vw,33px);font-weight:800;letter-spacing:-.025em;line-height:1.1;}
+  .bundle h3 .serif{color:var(--violet-lite);}
+  .bundle p{color:#BFB3CC;font-size:16px;}
+  .bundle .mark{flex-shrink:0;}
+  .bundle .mark img{width:190px;opacity:.95;}
+  @media (max-width:760px){.bundle .mark img{width:150px;}}
+
+  /* ── VIDEO ────────────────────────────────────────── */
+  .video{position:relative;border-radius:6px;overflow:hidden;background:#241A2C;
+    aspect-ratio:16/9;cursor:pointer;border:0;padding:0;width:100%;display:block;}
+  .video img{width:100%;height:100%;object-fit:cover;opacity:.82;
+    transition:opacity .2s ease,transform .3s ease;}
+  .video:hover img{opacity:.95;transform:scale(1.02);}
+  .video iframe{width:100%;height:100%;border:0;display:block;}
+  .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    pointer-events:none;}
+  .play i{width:76px;height:76px;border-radius:50%;background:rgba(122,33,201,.94);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 34px rgba(0,0,0,.45);}
+  .play i::after{content:"";border-left:21px solid #fff;border-top:13px solid transparent;
+    border-bottom:13px solid transparent;margin-left:6px;}
+  .video-cap{position:absolute;left:0;right:0;bottom:0;padding:20px 22px;
+    background:linear-gradient(transparent,rgba(12,9,15,.9));color:#fff;
+    font-size:14px;font-weight:700;letter-spacing:.02em;pointer-events:none;text-align:left;}
+  .video:focus-visible{outline:3px solid var(--violet-lite);outline-offset:3px;}
+
+  /* ── WORK GRID ────────────────────────────────────── */
+  .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
+  .work figure{margin:0;border-radius:5px;overflow:hidden;position:relative;
+    background:var(--ink);min-width:0;}
+  .work figure img{width:100%;aspect-ratio:4/3;object-fit:cover;opacity:.9;
+    transition:transform .35s ease,opacity .2s ease;}
+  .work figure:hover img{transform:scale(1.04);opacity:1;}
+  .work figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 16px 14px;
+    background:linear-gradient(transparent,rgba(12,9,15,.92));color:#fff;
+    display:flex;flex-direction:column;gap:2px;}
+  .work figcaption b{font-size:14.5px;font-weight:800;letter-spacing:-.01em;}
+  .work figcaption span{font-size:12px;color:#C6B9D2;font-weight:600;}
+  .work figure.feat{grid-column:span 2;}
+  .work figure.feat img{aspect-ratio:16/9;}
+  .work figure.feat figcaption b{font-size:18px;}
+  .work figure.feat::before{content:"49ers";position:absolute;top:14px;left:14px;z-index:2;
+    font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    background:var(--violet);color:#fff;padding:5px 11px;border-radius:999px;}
+  @media (max-width:640px){.work figure.feat{grid-column:span 1;}
+    .work figure.feat img{aspect-ratio:4/3;}}
+
+  .roster{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;}
+  .roster span{font-size:13px;font-weight:700;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:7px 13px;background:var(--paper);}
+
+  /* ── CTA ──────────────────────────────────────────── */
+  .cta{background:var(--violet);color:#fff;}
+  .cta .wrap{padding-block:52px;display:flex;flex-wrap:wrap;align-items:center;
+    justify-content:space-between;gap:24px;}
+  .cta .txt{display:flex;flex-direction:column;gap:8px;min-width:0;max-width:54ch;}
+  .cta h3{font-size:clamp(24px,3.2vw,33px);font-weight:800;letter-spacing:-.025em;}
+  .cta p{color:#EBDCFA;font-size:16px;}
+  .btn{display:inline-block;background:#fff;color:var(--violet-ink);text-decoration:none;
+    font-size:14px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+    padding:17px 34px;border-radius:3px;white-space:nowrap;transition:transform .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:focus-visible{outline:3px solid #2A0B47;outline-offset:3px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<!-- ════ HERO ════ -->
+<div class="hero">
+  <div class="hero-img">
+    <img data-slot="hero"
+         src="https://static.wixstatic.com/media/fe5d44_efea48fc84394fbfa8b8109b262e94e8f002.jpg"
+         alt="Jaymeebaaby performing a stadium set">
+  </div>
+  <div class="hero-grad"></div>
+  <div class="wrap hero-in">
+    <span class="eyebrow" style="color:var(--violet-lite)">Corporate &amp; brand activations</span>
+    <h2>The whole room,<br><span class="serif">handled by one team.</span></h2>
+    <p>Sound, music, lighting and capture for corporate events, brand activations and
+    private parties across the Bay Area — on one quote, with one person responsible on the day.</p>
+    <div class="hero-svcs">
+      <span>DJ</span><span>MC</span><span>Audio production</span>
+      <span>Lighting</span><span>Photo booth</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════ LOGO WALL ════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Trusted by</span>
+      <h3>Brands and teams she&rsquo;s already worked with.</h3>
+    </div>
+    <div class="logos">
+      <div><img src="https://static.wixstatic.com/media/fe5d44_3645928bc93f435d9ecf15543109dd8b~mv2.png" alt="Adobe"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_d0c1b1a29fba45cdb05f895f6b2644ca~mv2.png" alt="Salesforce"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_13dd017b29ec4efdbc2f9dfe85a22591~mv2.webp" alt="LinkedIn"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_259543cea7cf4e4c951f188bae0c6a78~mv2.png" alt="Macy's"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_4dc5a5a2d330460281a1c9fd9e05ff53~mv2.png" alt="Clinique"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_a272b5bd3aaa48939632494ced53ca12~mv2.png" alt="Alo Yoga"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_ee53e241f6b8438c83f4ccaad79bf7ed~mv2.png" alt="Ghirardelli"></div>
+      <div><img src="https://static.wixstatic.com/media/6426b8_dd6236ef4a6f4419aec451b9e2991867~mv2.png" alt="Converse"></div>
+      <div><img src="https://static.wixstatic.com/media/6426b8_56364e17fc1f4edea48baf8a42f53134~mv2.png" alt="San Francisco Giants"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_5dc895f8a4c54c41ad46d9943d3f7b7d~mv2.png" alt="Oakland Athletics"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ VIDEO ════ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">See the room</span>
+      <h3>What it actually looks like.</h3>
+      <p>A dance floor is easier to show than to describe.</p>
+    </div>
+    <button class="video" id="vid" aria-label="Play showreel">
+      <img data-slot="video-poster"
+           src="https://static.wixstatic.com/media/fe5d44_e29f3571b2b149889af97cb11cb035c7f002.jpg"
+           alt="Showreel">
+      <span class="play"><i></i></span>
+      <span class="video-cap">Showreel — 2025</span>
+    </button>
+  </div>
+</section>
+
+<!-- ════ SERVICES ════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What&rsquo;s included</span>
+      <h3>Five services. One team. One invoice.</h3>
+    </div>
+    <div class="svc">
+      <article>
+        <h4>DJ</h4>
+        <p>Open format — hip-hop, Top 40, R&amp;B, Latin, dance and throwbacks, read live off
+        the room, so a floor of mixed ages stays on it.</p>
+      </article>
+      <article>
+        <h4>MC</h4>
+        <p>Announcements, introductions and program flow. Someone driving the room instead of
+        a playlist running unattended.</p>
+      </article>
+      <article>
+        <h4>Audio production</h4>
+        <p>Full sound for the space, plus mics and cues for speeches, keynotes and awards —
+        not just the dance floor.</p>
+      </article>
+      <article>
+        <!-- CONFIRM: uplighting, dance-floor wash, or both? -->
+        <h4>Lighting</h4>
+        <p>Lighting matched to the room, from ambient wash through to a full dance floor.</p>
+      </article>
+      <article class="wide">
+        <div class="txt">
+          <!-- CONFIRM: can the booth be branded/skinned for a sponsor? -->
+          <h4>Photo booth</h4>
+          <p>Part of the same rig and the same quote, not a separate rental with a separate
+          contact. At an activation it doubles as branded content capture your team keeps
+          using long after the event.</p>
+        </div>
+        <div class="shot">
+          <img data-slot="booth"
+               src="https://static.wixstatic.com/media/6426b8_fde9c356cba2409398bcb3cc4bb14181~mv2.jpg"
+               alt="Photo booth at an event">
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════ BUNDLE ════ -->
+<div class="bundle">
+  <div class="wrap">
+    <div class="txt">
+      <h3>One quote, <span class="serif">not five line items.</span></h3>
+      <p>Most DJs price the music and leave you to source sound, lighting and a booth
+      separately. Everything here comes from the same team on a single quote — one contract,
+      one load-in, one person responsible, and a number you can actually compare.</p>
+    </div>
+    <div class="mark">
+      <img src="https://static.wixstatic.com/media/fe5d44_3ba79034195b42529c1944952d88f3bb~mv2.png"
+           alt="Jaymeebaaby">
+    </div>
+  </div>
+</div>
+
+<!-- ════ WORK ════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Selected work</span>
+      <h3>Stages she&rsquo;s already held.</h3>
+    </div>
+    <div class="work">
+      <!-- CONFIRM: season/date. Swap in a 49ers photo when you have one. -->
+      <figure class="feat">
+        <img data-slot="work-1"
+             src="https://static.wixstatic.com/media/fe5d44_2a9309eaecf548f7ab96ec949153ef86f002.jpg"
+             alt="Halftime show performance">
+        <figcaption><b>San Francisco 49ers — halftime show</b><span>Halftime performance with AMP Squad</span></figcaption>
+      </figure>
+      <figure>
+        <img data-slot="work-2"
+             src="https://static.wixstatic.com/media/6426b8_6eaf2a8dccc940e4bd66860a1c3dd427f000.jpg"
+             alt="SF Giants in-game set">
+        <figcaption><b>San Francisco Giants</b><span>In-game DJ, Oracle Park</span></figcaption>
+      </figure>
+      <figure>
+        <img data-slot="work-3"
+             src="https://static.wixstatic.com/media/fe5d44_5e5f2a9f12244b788704adaa8949b11ff002.jpg"
+             alt="Outside Lands festival set">
+        <figcaption><b>Outside Lands</b><span>Festival set, 2025</span></figcaption>
+      </figure>
+      <figure>
+        <img data-slot="work-4"
+             src="https://static.wixstatic.com/media/6426b8_f4a49101b9fa4985a647beccb5d8782bf002.jpg"
+             alt="Oakland Athletics AAPI Night">
+        <figcaption><b>Oakland Athletics</b><span>In-game DJ, AAPI Night</span></figcaption>
+      </figure>
+    </div>
+    <div class="roster">
+      <span>Bay FC</span><span>NWSL Championship 2025</span>
+      <span>NFL Flag International Championship 2026</span>
+      <span>99.7 NOW (KMVQ) Mixshow</span><span>LPGA Hanwha LIFEPLUS International Crown</span>
+    </div>
+  </div>
+</section>
+
+<!--
+  TESTIMONIAL SLOT — intentionally empty.
+  Drop 2–3 real quotes here once we have them (name + company + date).
+  No placeholder quotes.
+-->
+
+<!-- ════ CTA ════ -->
+<div class="cta">
+  <div class="wrap">
+    <div class="txt">
+      <h3>Check your date.</h3>
+      <p>Send the date, the venue and roughly how many people. You&rsquo;ll get a written quote
+      back covering everything you need for the room.</p>
+    </div>
+    <a class="btn" href="/connect" target="_top">Check my date</a>
+  </div>
+</div>
+
+<script>
+  // Put a YouTube video ID here to turn the poster into a real player.
+  var YT_ID = "";
+  document.getElementById("vid").addEventListener("click", function () {
+    if (!YT_ID) { window.open("https://www.youtube.com/@jaymeebaaby", "_blank"); return; }
+    this.innerHTML =
+      '<iframe src="https://www.youtube.com/embed/' + YT_ID + '?autoplay=1&rel=0" ' +
+      'title="Showreel" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+  });
+</script>
+
+</body>
+</html>
