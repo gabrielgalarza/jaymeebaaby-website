@@ -5,34 +5,28 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Corporate &amp; Brand Activations — block</title>
 <!--
-  WIX EMBED BLOCK — Corporate & Brand Activations  (v2 — photo + logo led)
-  ========================================================================
+  WIX EMBED BLOCK — Corporate & Brand Activations   (v3)
+  ======================================================
   Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
-  Heights are noted at the bottom of this comment.
+  HEIGHT — measured 3451px at 1280 wide, 5605px at 400 wide.
+  Set the Wix element to 3550px desktop / 5750px mobile. Re-check after swapping photos.
 
-  ── SWAPPING IN YOUR OWN PHOTOS ─────────────────────────────────────────
-  Every image below is pulled from your existing Wix media library, so this
-  works as-is today. To use the press-kit shots instead:
-    1. Wix > Media Manager > upload the photo
-    2. Click it > "Copy URL"  (gives you a static.wixstatic.com link)
-    3. Find the matching  data-slot="..."  below and replace its src
-  Slots, in order:
-    hero            big opening photo          — want: her working a daytime/corporate room
-    video-poster    video thumbnail            — want: 49ers halftime or a stadium clip
-    work-1..4       four credit photos
-    booth           photo booth / activation   — want: the booth set up at an event
+  ── SWAP IN YOUR OWN PHOTOS ──────────────────────────────────────────
+  Wix > Media Manager > upload > click the image > "Copy URL",
+  then replace the src on the matching data-slot below.
 
-  ── TURNING ON THE VIDEO ────────────────────────────────────────────────
-  Put a YouTube ID in YT_ID below (the part after v=). The poster image then
-  becomes a real player on click. Leave it empty and the poster links out instead.
+    hero        her, portrait-ish, head and shoulders visible   ** best upgrade **
+    svc-dj / svc-mc / svc-audio / svc-light / svc-booth
+    work-49ers  ** currently NO photo — tile is type-only until you send one **
+    work-giants / work-ol / work-as
 
-  ── STILL TO CONFIRM ────────────────────────────────────────────────────
+  ── LINK A VIDEO TO AN EVENT ─────────────────────────────────────────
+  Put a URL in the VIDEOS map at the bottom of this file. Any tile with a
+  URL gets a play badge and opens the video in a new tab. Leave it ""
+  and the tile stays a plain photo. Works with YouTube, IG, TikTok, Drive.
+
+  ── STILL TO CONFIRM ─────────────────────────────────────────────────
   Lighting type · booth branding · 49ers season/date · travel radius · testimonials
-
-  ── HEIGHT ──────────────────────────────────────────────────────────────
-  Measured: 4312px at 1200px wide · 5177px at 400px wide.
-  Set the Wix element to 4400px desktop and 5300px mobile (slack for font loading).
-  Every photo you swap in changes this — re-check after swapping.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,8 +34,8 @@
 <style>
   :root{
     --ink:#120E16; --muted:#5B5266; --line:#E4DEEA;
-    --paper:#FFFFFF; --alt:#F7F4FA;
-    --violet:#7A21C9; --violet-ink:#5C169B; --violet-lite:#B36BF0; --violet-soft:#F2E9FB;
+    --paper:#FFFFFF; --alt:#F8F5FB;
+    --violet:#7A21C9; --violet-ink:#5C169B; --violet-lite:#B36BF0; --violet-soft:#F3EAFB;
     --display:'Archivo','Helvetica Neue',Arial,sans-serif;
     --serif:'Instrument Serif',Georgia,serif;
   }
@@ -52,156 +46,179 @@
   img{max-width:100%;display:block;}
   h2,h3,h4{margin:0;text-wrap:balance;}
   p{margin:0;}
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding-inline:24px;}
   .eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
     color:var(--violet);}
-  .wrap{max-width:1140px;margin:0 auto;padding-inline:22px;}
-  .serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.005em;}
 
-  /* ── HERO ─────────────────────────────────────────── */
-  .hero{position:relative;background:var(--ink);color:#fff;overflow:hidden;}
-  .hero-img{position:absolute;inset:0;}
-  .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 28%;
-    opacity:.46;filter:saturate(.85);}
-  .hero-grad{position:absolute;inset:0;
-    background:linear-gradient(105deg,rgba(18,14,22,.94) 0%,rgba(18,14,22,.78) 44%,rgba(18,14,22,.34) 100%);}
-  .hero-in{position:relative;padding-block:74px 68px;display:flex;flex-direction:column;
-    gap:20px;max-width:46ch;}
-  .hero h2{font-size:clamp(34px,5.6vw,60px);font-weight:900;letter-spacing:-.03em;line-height:1;}
+  .btn{display:inline-block;background:var(--violet);color:#fff;text-decoration:none;
+    font-size:13.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+    padding:16px 32px;border-radius:3px;white-space:nowrap;
+    transition:background .15s ease,transform .15s ease;}
+  .btn:hover{background:var(--violet-ink);transform:translateY(-1px);}
+  .btn:focus-visible{outline:3px solid var(--violet-lite);outline-offset:3px;}
+  .btn.light{background:#fff;color:var(--violet-ink);}
+  .btn.light:hover{background:#F3E8FD;}
+
+  /* ══ HERO — split on desktop, stacked on mobile ══ */
+  .hero{background:var(--ink);color:#fff;overflow:hidden;}
+  .hero .wrap{display:grid;grid-template-columns:1fr 0.86fr;gap:52px;align-items:center;
+    padding-block:64px;}
+  .hero-txt{display:flex;flex-direction:column;gap:18px;min-width:0;}
+  .hero h2{font-size:clamp(32px,3.9vw,52px);font-weight:900;letter-spacing:-.032em;
+    line-height:1.02;max-width:15ch;}
   .hero h2 .serif{color:var(--violet-lite);}
-  .hero p{font-size:clamp(16px,1.9vw,19px);color:#CFC4DA;max-width:48ch;}
-  .hero-svcs{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
-  .hero-svcs span{font-size:11.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
-    border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:7px 14px;color:#EDE6F3;}
-
-  /* ── SECTION SHELL ────────────────────────────────── */
-  section{padding-block:60px;}
-  section.tint{background:var(--alt);}
-  .sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:30px;max-width:60ch;}
-  .sec-head h3{font-size:clamp(24px,3.3vw,34px);font-weight:800;letter-spacing:-.025em;line-height:1.08;}
-  .sec-head p{color:var(--muted);font-size:16.5px;}
-
-  /* ── LOGO WALL ────────────────────────────────────── */
-  .logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));
-    gap:1px;background:var(--line);border:1px solid var(--line);border-radius:5px;overflow:hidden;}
-  .logos div{background:var(--paper);height:96px;display:flex;align-items:center;
-    justify-content:center;padding:18px 20px;}
-  .logos img{max-height:100%;max-width:100%;width:auto;object-fit:contain;
-    filter:grayscale(1) contrast(.85) brightness(.55);opacity:.72;
-    transition:filter .2s ease,opacity .2s ease;}
-  .logos div:hover img{filter:none;opacity:1;}
-
-  /* ── SERVICES ─────────────────────────────────────── */
-  .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;}
-  .svc article{background:var(--paper);border:1px solid var(--line);border-radius:5px;
-    padding:20px 19px 22px;display:flex;flex-direction:column;gap:8px;min-width:0;}
-  .svc h4{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
-    color:var(--violet-ink);}
-  .svc p{font-size:14.5px;color:var(--muted);line-height:1.5;}
-  .svc article.wide{grid-column:1/-1;background:var(--violet-soft);border-color:#DCC4F2;
-    flex-direction:row;gap:18px;align-items:stretch;}
-  .svc article.wide .txt{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1;}
-  .svc article.wide .shot{width:38%;max-width:420px;flex-shrink:0;border-radius:4px;overflow:hidden;
-    background:#E3D4F2;}
-  .svc article.wide .shot img{width:100%;height:100%;object-fit:cover;min-height:150px;}
-  @media (max-width:700px){
-    .svc article.wide{flex-direction:column;}
-    .svc article.wide .shot{width:100%;}
+  .hero p{font-size:17px;color:#C8BCD4;max-width:46ch;}
+  .pills{display:flex;flex-wrap:wrap;gap:7px;}
+  .pills span{font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;color:#E7DEEF;}
+  .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:6px;}
+  .hero-cta small{font-size:13px;color:#9D90AB;}
+  .hero-shot{position:relative;min-width:0;}
+  .hero-shot img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;}
+  .hero-shot::after{content:"";position:absolute;inset:0;border-radius:6px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;gap:30px;padding-block:46px;}
+    .hero-shot{order:-1;}
+    .hero-shot img{aspect-ratio:16/10;}
+    .hero h2{max-width:none;}
   }
 
-  /* ── BUNDLE BAND ──────────────────────────────────── */
+  /* ══ SECTIONS ══ */
+  section{padding-block:62px;}
+  section.tint{background:var(--alt);}
+  .sec-head{display:flex;flex-direction:column;gap:9px;margin-bottom:28px;max-width:58ch;}
+  .sec-head h3{font-size:clamp(23px,3vw,32px);font-weight:800;letter-spacing:-.025em;line-height:1.1;}
+  .sec-head p{color:var(--muted);font-size:16px;}
+
+  /* ══ LOGO WALL — 5 × 2, always full ══ */
+  .logos{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:5px;overflow:hidden;}
+  .logos div{background:var(--paper);height:104px;display:flex;align-items:center;
+    justify-content:center;padding:20px 22px;}
+  .logos img{max-height:100%;max-width:100%;width:auto;object-fit:contain;
+    filter:grayscale(1) brightness(.5);opacity:.7;transition:filter .2s ease,opacity .2s ease;}
+  .logos div:hover img{filter:none;opacity:1;}
+  @media (max-width:860px){.logos{grid-template-columns:repeat(3,1fr);}
+    .logos div:nth-child(10){grid-column:2;}}
+  @media (max-width:520px){.logos{grid-template-columns:repeat(2,1fr);}
+    .logos div{height:84px;padding:16px;}
+    .logos div:nth-child(10){grid-column:auto;}}
+
+  /* ══ SERVICES — 4 photo cards + 1 feature band ══ */
+  .svc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .svc article{background:var(--paper);border:1px solid var(--line);border-radius:6px;
+    overflow:hidden;display:flex;flex-direction:column;min-width:0;}
+  .svc article img{width:100%;aspect-ratio:3/2;object-fit:cover;}
+  .svc .txt{padding:16px 17px 19px;display:flex;flex-direction:column;gap:6px;}
+  .svc h4{font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--violet-ink);}
+  .svc p{font-size:14.5px;color:var(--muted);line-height:1.5;}
+  @media (max-width:880px){.svc{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:480px){.svc{grid-template-columns:1fr;}}
+
+  .feature{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:0;
+    background:var(--violet-soft);border:1px solid #DFC9F4;border-radius:6px;overflow:hidden;}
+  .feature .txt{padding:30px 32px;display:flex;flex-direction:column;gap:10px;
+    justify-content:center;min-width:0;}
+  .feature h4{font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--violet-ink);}
+  .feature h3{font-size:clamp(19px,2.3vw,25px);font-weight:800;letter-spacing:-.02em;}
+  .feature p{font-size:15px;color:#5A4A68;max-width:46ch;}
+  .feature img{width:100%;height:100%;min-height:260px;object-fit:cover;}
+  @media (max-width:760px){.feature{grid-template-columns:1fr;}
+    .feature img{min-height:0;aspect-ratio:16/10;order:-1;}
+    .feature .txt{padding:24px;}}
+
+  /* ══ BUNDLE ══ */
   .bundle{background:var(--ink);color:#fff;}
-  .bundle .wrap{padding-block:52px;display:flex;flex-wrap:wrap;align-items:center;
-    justify-content:space-between;gap:28px;}
-  .bundle .txt{display:flex;flex-direction:column;gap:12px;max-width:60ch;min-width:0;}
-  .bundle h3{font-size:clamp(23px,3.2vw,33px);font-weight:800;letter-spacing:-.025em;line-height:1.1;}
+  .bundle .wrap{padding-block:54px;display:flex;flex-wrap:wrap;align-items:center;
+    justify-content:space-between;gap:30px;}
+  .bundle .txt{display:flex;flex-direction:column;gap:12px;max-width:58ch;min-width:0;}
+  .bundle h3{font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.025em;line-height:1.1;}
   .bundle h3 .serif{color:var(--violet-lite);}
-  .bundle p{color:#BFB3CC;font-size:16px;}
-  .bundle .mark{flex-shrink:0;}
-  .bundle .mark img{width:190px;opacity:.95;}
-  @media (max-width:760px){.bundle .mark img{width:150px;}}
+  .bundle p{color:#BDB1CA;font-size:16px;}
+  .bundle img{width:180px;opacity:.95;flex-shrink:0;}
+  @media (max-width:760px){.bundle img{width:140px;}}
 
-  /* ── VIDEO ────────────────────────────────────────── */
-  .video{position:relative;border-radius:6px;overflow:hidden;background:#241A2C;
-    aspect-ratio:16/9;cursor:pointer;border:0;padding:0;width:100%;display:block;}
-  .video img{width:100%;height:100%;object-fit:cover;opacity:.82;
-    transition:opacity .2s ease,transform .3s ease;}
-  .video:hover img{opacity:.95;transform:scale(1.02);}
-  .video iframe{width:100%;height:100%;border:0;display:block;}
-  .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    pointer-events:none;}
-  .play i{width:76px;height:76px;border-radius:50%;background:rgba(122,33,201,.94);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 8px 34px rgba(0,0,0,.45);}
-  .play i::after{content:"";border-left:21px solid #fff;border-top:13px solid transparent;
-    border-bottom:13px solid transparent;margin-left:6px;}
-  .video-cap{position:absolute;left:0;right:0;bottom:0;padding:20px 22px;
-    background:linear-gradient(transparent,rgba(12,9,15,.9));color:#fff;
-    font-size:14px;font-weight:700;letter-spacing:.02em;pointer-events:none;text-align:left;}
-  .video:focus-visible{outline:3px solid var(--violet-lite);outline-offset:3px;}
-
-  /* ── WORK GRID ────────────────────────────────────── */
-  .work{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
-  .work figure{margin:0;border-radius:5px;overflow:hidden;position:relative;
-    background:var(--ink);min-width:0;}
-  .work figure img{width:100%;aspect-ratio:4/3;object-fit:cover;opacity:.9;
-    transition:transform .35s ease,opacity .2s ease;}
-  .work figure:hover img{transform:scale(1.04);opacity:1;}
-  .work figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 16px 14px;
-    background:linear-gradient(transparent,rgba(12,9,15,.92));color:#fff;
+  /* ══ WORK ══ */
+  .work{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .tile{position:relative;border-radius:6px;overflow:hidden;background:var(--ink);
+    display:block;text-decoration:none;color:#fff;min-width:0;}
+  .tile img{width:100%;aspect-ratio:4/3;object-fit:cover;opacity:.92;
+    transition:transform .4s ease,opacity .2s ease;}
+  .tile:hover img{transform:scale(1.045);opacity:1;}
+  .tile .cap{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 15px;
+    background:linear-gradient(transparent,rgba(10,7,13,.93));
     display:flex;flex-direction:column;gap:2px;}
-  .work figcaption b{font-size:14.5px;font-weight:800;letter-spacing:-.01em;}
-  .work figcaption span{font-size:12px;color:#C6B9D2;font-weight:600;}
-  .work figure.feat{grid-column:span 2;}
-  .work figure.feat img{aspect-ratio:16/9;}
-  .work figure.feat figcaption b{font-size:18px;}
-  .work figure.feat::before{content:"49ers";position:absolute;top:14px;left:14px;z-index:2;
-    font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-    background:var(--violet);color:#fff;padding:5px 11px;border-radius:999px;}
-  @media (max-width:640px){.work figure.feat{grid-column:span 1;}
-    .work figure.feat img{aspect-ratio:4/3;}}
+  .tile .cap b{font-size:14.5px;font-weight:800;letter-spacing:-.01em;}
+  .tile .cap span{font-size:12px;color:#C3B6D0;font-weight:600;}
+  .tile .badge{position:absolute;top:12px;left:12px;font-size:10px;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;background:var(--violet);color:#fff;
+    padding:5px 10px;border-radius:999px;}
+  .tile .pv{position:absolute;top:11px;right:11px;width:34px;height:34px;border-radius:50%;
+    background:rgba(122,33,201,.95);display:none;align-items:center;justify-content:center;}
+  .tile .pv::after{content:"";border-left:11px solid #fff;border-top:7px solid transparent;
+    border-bottom:7px solid transparent;margin-left:3px;}
+  .tile.has-video .pv{display:flex;}
+  .tile:focus-visible{outline:3px solid var(--violet);outline-offset:3px;}
+  /* 49ers: type-only until a photo exists */
+  /* 49ers tile: same footprint as the photo tiles, type-only until a photo lands */
+  .tile.lead{aspect-ratio:4/3;background:
+    radial-gradient(125% 125% at 80% 10%,#8A2CDD 0%,#3A0E62 50%,#16081F 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:22px 20px;}
+  .tile.lead b{font-size:clamp(19px,1.8vw,23px);font-weight:900;letter-spacing:-.025em;
+    line-height:1.08;display:block;}
+  .tile.lead > span:not(.badge):not(.pv){font-size:13.5px;color:#D5BFEC;font-weight:600;
+    margin-top:3px;}
+  .tile.lead .badge{background:rgba(255,255,255,.18);}
+  @media (max-width:880px){.work{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:480px){.work{grid-template-columns:1fr;}}
 
-  .roster{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;}
-  .roster span{font-size:13px;font-weight:700;color:var(--muted);
-    border:1px solid var(--line);border-radius:999px;padding:7px 13px;background:var(--paper);}
+  .roster{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .roster span{font-size:13px;font-weight:700;color:var(--muted);background:var(--paper);
+    border:1px solid var(--line);border-radius:999px;padding:7px 14px;}
 
-  /* ── CTA ──────────────────────────────────────────── */
+  /* ══ CTA ══ */
   .cta{background:var(--violet);color:#fff;}
   .cta .wrap{padding-block:52px;display:flex;flex-wrap:wrap;align-items:center;
     justify-content:space-between;gap:24px;}
-  .cta .txt{display:flex;flex-direction:column;gap:8px;min-width:0;max-width:54ch;}
-  .cta h3{font-size:clamp(24px,3.2vw,33px);font-weight:800;letter-spacing:-.025em;}
+  .cta .txt{display:flex;flex-direction:column;gap:8px;min-width:0;max-width:52ch;}
+  .cta h3{font-size:clamp(23px,3vw,32px);font-weight:800;letter-spacing:-.025em;}
   .cta p{color:#EBDCFA;font-size:16px;}
-  .btn{display:inline-block;background:#fff;color:var(--violet-ink);text-decoration:none;
-    font-size:14px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
-    padding:17px 34px;border-radius:3px;white-space:nowrap;transition:transform .15s ease;}
-  .btn:hover{transform:translateY(-2px);}
-  .btn:focus-visible{outline:3px solid #2A0B47;outline-offset:3px;}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
 </style>
 </head>
 <body>
 
-<!-- ════ HERO ════ -->
+<!-- ══ HERO ══ -->
 <div class="hero">
-  <div class="hero-img">
-    <img data-slot="hero"
-         src="https://static.wixstatic.com/media/fe5d44_efea48fc84394fbfa8b8109b262e94e8f002.jpg"
-         alt="Jaymeebaaby performing a stadium set">
-  </div>
-  <div class="hero-grad"></div>
-  <div class="wrap hero-in">
-    <span class="eyebrow" style="color:var(--violet-lite)">Corporate &amp; brand activations</span>
-    <h2>The whole room,<br><span class="serif">handled by one team.</span></h2>
-    <p>Sound, music, lighting and capture for corporate events, brand activations and
-    private parties across the Bay Area — on one quote, with one person responsible on the day.</p>
-    <div class="hero-svcs">
-      <span>DJ</span><span>MC</span><span>Audio production</span>
-      <span>Lighting</span><span>Photo booth</span>
+  <div class="wrap">
+    <div class="hero-txt">
+      <span class="eyebrow" style="color:var(--violet-lite)">Corporate &amp; brand activations</span>
+      <h2>The whole room, <span class="serif">handled by one team.</span></h2>
+      <p>Sound, music, lighting and capture for corporate events, brand activations and private
+      parties across the Bay Area — on one quote, with one person responsible on the day.</p>
+      <div class="pills">
+        <span>DJ</span><span>MC</span><span>Audio production</span>
+        <span>Lighting</span><span>Photo booth</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn" href="/connect" target="_top">Book Jaymeebaaby</a>
+        <small>Written quote back within 24 hours.</small>
+      </div>
+    </div>
+    <div class="hero-shot">
+      <img data-slot="hero"
+           src="https://static.wixstatic.com/media/fe5d44_67087a55e6014f3d9d5c09aa278ff784~mv2.jpg"
+           alt="Jaymeebaaby performing">
     </div>
   </div>
 </div>
 
-<!-- ════ LOGO WALL ════ -->
+<!-- ══ LOGOS ══ -->
 <section>
   <div class="wrap">
     <div class="sec-head">
@@ -223,26 +240,8 @@
   </div>
 </section>
 
-<!-- ════ VIDEO ════ -->
+<!-- ══ SERVICES ══ -->
 <section class="tint">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">See the room</span>
-      <h3>What it actually looks like.</h3>
-      <p>A dance floor is easier to show than to describe.</p>
-    </div>
-    <button class="video" id="vid" aria-label="Play showreel">
-      <img data-slot="video-poster"
-           src="https://static.wixstatic.com/media/fe5d44_e29f3571b2b149889af97cb11cb035c7f002.jpg"
-           alt="Showreel">
-      <span class="play"><i></i></span>
-      <span class="video-cap">Showreel — 2025</span>
-    </button>
-  </div>
-</section>
-
-<!-- ════ SERVICES ════ -->
-<section>
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">What&rsquo;s included</span>
@@ -250,60 +249,51 @@
     </div>
     <div class="svc">
       <article>
-        <h4>DJ</h4>
-        <p>Open format — hip-hop, Top 40, R&amp;B, Latin, dance and throwbacks, read live off
-        the room, so a floor of mixed ages stays on it.</p>
+        <img data-slot="svc-dj" src="https://static.wixstatic.com/media/fe5d44_efea48fc84394fbfa8b8109b262e94e8f002.jpg" alt="DJ set">
+        <div class="txt"><h4>DJ</h4><p>Open format, read live off the room.</p></div>
       </article>
       <article>
-        <h4>MC</h4>
-        <p>Announcements, introductions and program flow. Someone driving the room instead of
-        a playlist running unattended.</p>
+        <img data-slot="svc-mc" src="https://static.wixstatic.com/media/6426b8_fde9c356cba2409398bcb3cc4bb14181~mv2.jpg" alt="MC duties">
+        <div class="txt"><h4>MC</h4><p>Introductions, announcements, program flow.</p></div>
       </article>
       <article>
-        <h4>Audio production</h4>
-        <p>Full sound for the space, plus mics and cues for speeches, keynotes and awards —
-        not just the dance floor.</p>
+        <img data-slot="svc-audio" src="https://static.wixstatic.com/media/6426b8_305ed4ff1b724799bfa6ed6e031c4aecf003.jpg" alt="Audio setup">
+        <div class="txt"><h4>Audio production</h4><p>Full sound, plus mics and cues for speeches and keynotes.</p></div>
       </article>
       <article>
         <!-- CONFIRM: uplighting, dance-floor wash, or both? -->
-        <h4>Lighting</h4>
-        <p>Lighting matched to the room, from ambient wash through to a full dance floor.</p>
+        <img data-slot="svc-light" src="https://static.wixstatic.com/media/fe5d44_34e0b8a711324014a49d7b74ecfa3262f002.jpg" alt="Event lighting">
+        <div class="txt"><h4>Lighting</h4><p>Ambient wash through to a full dance floor.</p></div>
       </article>
-      <article class="wide">
-        <div class="txt">
-          <!-- CONFIRM: can the booth be branded/skinned for a sponsor? -->
-          <h4>Photo booth</h4>
-          <p>Part of the same rig and the same quote, not a separate rental with a separate
-          contact. At an activation it doubles as branded content capture your team keeps
-          using long after the event.</p>
-        </div>
-        <div class="shot">
-          <img data-slot="booth"
-               src="https://static.wixstatic.com/media/6426b8_fde9c356cba2409398bcb3cc4bb14181~mv2.jpg"
-               alt="Photo booth at an event">
-        </div>
-      </article>
+    </div>
+
+    <div class="feature">
+      <div class="txt">
+        <h4>Photo booth</h4>
+        <h3>Same rig. Same quote.</h3>
+        <!-- CONFIRM: can the booth be branded/skinned for a sponsor? -->
+        <p>Not a separate rental with a separate contact. At an activation it doubles as
+        branded content capture your team keeps using after the event.</p>
+      </div>
+      <img data-slot="svc-booth" src="https://static.wixstatic.com/media/6426b8_946a4f88181148b681df1f92e50a83f4~mv2.jpg" alt="Photo booth at an event">
     </div>
   </div>
 </section>
 
-<!-- ════ BUNDLE ════ -->
+<!-- ══ BUNDLE ══ -->
 <div class="bundle">
   <div class="wrap">
     <div class="txt">
       <h3>One quote, <span class="serif">not five line items.</span></h3>
       <p>Most DJs price the music and leave you to source sound, lighting and a booth
-      separately. Everything here comes from the same team on a single quote — one contract,
-      one load-in, one person responsible, and a number you can actually compare.</p>
+      separately. Everything here comes from the same team — one contract, one load-in,
+      one person responsible, and a number you can actually compare.</p>
     </div>
-    <div class="mark">
-      <img src="https://static.wixstatic.com/media/fe5d44_3ba79034195b42529c1944952d88f3bb~mv2.png"
-           alt="Jaymeebaaby">
-    </div>
+    <img src="https://static.wixstatic.com/media/fe5d44_3ba79034195b42529c1944952d88f3bb~mv2.png" alt="Jaymeebaaby">
   </div>
 </div>
 
-<!-- ════ WORK ════ -->
+<!-- ══ SELECTED WORK ══ -->
 <section>
   <div class="wrap">
     <div class="sec-head">
@@ -311,31 +301,29 @@
       <h3>Stages she&rsquo;s already held.</h3>
     </div>
     <div class="work">
-      <!-- CONFIRM: season/date. Swap in a 49ers photo when you have one. -->
-      <figure class="feat">
-        <img data-slot="work-1"
-             src="https://static.wixstatic.com/media/fe5d44_2a9309eaecf548f7ab96ec949153ef86f002.jpg"
-             alt="Halftime show performance">
-        <figcaption><b>San Francisco 49ers — halftime show</b><span>Halftime performance with AMP Squad</span></figcaption>
-      </figure>
-      <figure>
-        <img data-slot="work-2"
-             src="https://static.wixstatic.com/media/6426b8_6eaf2a8dccc940e4bd66860a1c3dd427f000.jpg"
-             alt="SF Giants in-game set">
-        <figcaption><b>San Francisco Giants</b><span>In-game DJ, Oracle Park</span></figcaption>
-      </figure>
-      <figure>
-        <img data-slot="work-3"
-             src="https://static.wixstatic.com/media/fe5d44_5e5f2a9f12244b788704adaa8949b11ff002.jpg"
-             alt="Outside Lands festival set">
-        <figcaption><b>Outside Lands</b><span>Festival set, 2025</span></figcaption>
-      </figure>
-      <figure>
-        <img data-slot="work-4"
-             src="https://static.wixstatic.com/media/6426b8_f4a49101b9fa4985a647beccb5d8782bf002.jpg"
-             alt="Oakland Athletics AAPI Night">
-        <figcaption><b>Oakland Athletics</b><span>In-game DJ, AAPI Night</span></figcaption>
-      </figure>
+      <!-- 49ers: no photo yet. Add one and this becomes a photo tile like the others:
+           <img data-slot="work-49ers" src="..." alt="..."> and remove class "lead" styling text -->
+      <a class="tile lead" data-video="49ers">
+        <span class="badge">Halftime</span>
+        <b>San Francisco 49ers</b>
+        <span>Halftime show with AMP Squad</span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile" data-video="giants">
+        <img data-slot="work-giants" src="https://static.wixstatic.com/media/6426b8_6eaf2a8dccc940e4bd66860a1c3dd427f000.jpg" alt="Jaymeebaaby at Oracle Park">
+        <span class="cap"><b>San Francisco Giants</b><span>In-game DJ, Oracle Park</span></span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile" data-video="outsidelands">
+        <img data-slot="work-ol" src="https://static.wixstatic.com/media/fe5d44_5e5f2a9f12244b788704adaa8949b11ff002.jpg" alt="Outside Lands crowd">
+        <span class="cap"><b>Outside Lands</b><span>Festival set, 2025</span></span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile" data-video="athletics">
+        <img data-slot="work-as" src="https://static.wixstatic.com/media/6426b8_f4a49101b9fa4985a647beccb5d8782bf002.jpg" alt="Oakland Athletics AAPI Night">
+        <span class="cap"><b>Oakland Athletics</b><span>In-game DJ, AAPI Night</span></span>
+        <span class="pv"></span>
+      </a>
     </div>
     <div class="roster">
       <span>Bay FC</span><span>NWSL Championship 2025</span>
@@ -345,34 +333,38 @@
   </div>
 </section>
 
-<!--
-  TESTIMONIAL SLOT — intentionally empty.
-  Drop 2–3 real quotes here once we have them (name + company + date).
-  No placeholder quotes.
--->
+<!-- TESTIMONIAL SLOT — intentionally empty until we have real quotes. -->
 
-<!-- ════ CTA ════ -->
+<!-- ══ CTA ══ -->
 <div class="cta">
   <div class="wrap">
     <div class="txt">
       <h3>Check your date.</h3>
       <p>Send the date, the venue and roughly how many people. You&rsquo;ll get a written quote
-      back covering everything you need for the room.</p>
+      back covering everything the room needs.</p>
     </div>
-    <a class="btn" href="/connect" target="_top">Check my date</a>
+    <a class="btn light" href="/connect" target="_top">Book Jaymeebaaby</a>
   </div>
 </div>
 
 <script>
-  // Put a YouTube video ID here to turn the poster into a real player.
-  var YT_ID = "";
-  document.getElementById("vid").addEventListener("click", function () {
-    if (!YT_ID) { window.open("https://www.youtube.com/@jaymeebaaby", "_blank"); return; }
-    this.innerHTML =
-      '<iframe src="https://www.youtube.com/embed/' + YT_ID + '?autoplay=1&rel=0" ' +
-      'title="Showreel" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+  /* Paste a video URL next to an event to make its tile clickable.
+     Leave "" and the tile stays a plain photo. */
+  var VIDEOS = {
+    "49ers":        "",
+    "giants":       "",
+    "outsidelands": "",
+    "athletics":    ""
+  };
+  document.querySelectorAll(".tile").forEach(function (t) {
+    var url = VIDEOS[t.getAttribute("data-video")];
+    if (url) {
+      t.href = url;
+      t.target = "_blank";
+      t.rel = "noopener";
+      t.classList.add("has-video");
+    }
   });
 </script>
-
 </body>
 </html>
