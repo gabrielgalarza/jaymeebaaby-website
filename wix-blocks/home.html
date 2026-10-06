@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Home — block</title>
+<!--
+  WIX EMBED BLOCK — Home  (page: /)
+  =================================
+  Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
+  Height is noted at the end of this comment.
+
+  Replaces the "Acerca de — MEET Jaymeebaaby" opening. The bio is still worth
+  keeping, but it belongs BELOW this block, not above it.
+
+  ── WHERE THE PHOTOS COME FROM ─────────────────────────────────────
+  https://gabrielgalarza.github.io/jaymeebaaby-website/images/
+  Works today. Before going live for real, upload the same files to
+  Wix > Media Manager and find/replace that prefix with the Wix one.
+
+  ── THE THREE LANES POINT AT ───────────────────────────────────────
+    /corporate         ** this Wix page does not exist yet **
+    /weddings-events   ** rename the existing /weddings-corporate page **
+    /mixes             exists
+  Update the hrefs below if you use different slugs.
+
+  NATIVE WIX TEXT to put ABOVE this block (iframe text isn't indexed):
+    H1: Bay Area DJ for Corporate Events, Brand Activations & Weddings
+    Page SEO title: Bay Area Corporate, Wedding & Event DJ | Jaymeebaaby
+
+  ── HEIGHT ─────────────────────────────────────────────────────────
+  Measured 2323px at 1280 wide, 3769px at 400 wide.
+  Set the Wix element to 2420px desktop / 3900px mobile.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  :root{
+    --ink:#120E16; --muted:#5B5266; --line:#E4DEEA;
+    --paper:#FFFFFF; --alt:#F8F5FB;
+    --violet:#7A21C9; --violet-ink:#5C169B; --violet-lite:#B36BF0;
+    --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+    --serif:'Instrument Serif',Georgia,serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--display);
+    font-weight:500;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  h2,h3,h4{margin:0;text-wrap:balance;}
+  p{margin:0;}
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding-inline:24px;}
+  .eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--violet);}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.005em;}
+  .btn{display:inline-flex;align-items:center;gap:11px;background:var(--violet);color:#fff;
+    text-decoration:none;font-size:13.5px;font-weight:800;letter-spacing:.09em;
+    text-transform:uppercase;padding:16px 30px;border-radius:3px;white-space:nowrap;
+    transition:background .15s ease,transform .15s ease;}
+  .btn svg{width:17px;height:12px;flex-shrink:0;transition:transform .2s ease;}
+  .btn:hover{background:var(--violet-ink);transform:translateY(-1px);}
+  .btn:hover svg{transform:translateX(4px);}
+  .btn:focus-visible{outline:3px solid var(--violet-lite);outline-offset:3px;}
+
+  /* hero */
+  .hero{background:var(--ink);color:#fff;}
+  .hero .wrap{display:grid;grid-template-columns:1fr .86fr;gap:52px;align-items:center;
+    padding-block:64px;}
+  .hero-txt{display:flex;flex-direction:column;gap:18px;min-width:0;}
+  .hero h2{font-size:clamp(32px,4vw,54px);font-weight:900;letter-spacing:-.032em;
+    line-height:1.02;max-width:15ch;}
+  .hero h2 .serif{color:var(--violet-lite);}
+  .hero p{font-size:17px;color:#C8BCD4;max-width:46ch;}
+  .hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:4px;}
+  .hero-cta small{font-size:13px;color:#9D90AB;}
+  .shot{position:relative;min-width:0;}
+  .shot img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;}
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;gap:30px;padding-block:44px;}
+    .shot{order:-1;} .shot img{aspect-ratio:16/10;} .hero h2{max-width:none;}
+  }
+
+  /* proof */
+  .proof{background:var(--alt);border-bottom:1px solid var(--line);}
+  .proof .wrap{padding-block:30px;display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:22px;}
+  .stat{display:flex;flex-direction:column;gap:2px;min-width:0;}
+  .stat b{font-family:var(--display);font-size:clamp(21px,2.4vw,27px);font-weight:900;
+    letter-spacing:-.025em;}
+  .stat span{font-size:13.5px;color:var(--muted);font-weight:600;}
+
+  /* logos */
+  section{padding-block:56px;}
+  .sec-head{display:flex;flex-direction:column;gap:9px;margin-bottom:26px;max-width:58ch;}
+  .sec-head h3{font-size:clamp(22px,2.9vw,31px);font-weight:800;letter-spacing:-.025em;
+    line-height:1.1;}
+  .sec-head p{color:var(--muted);font-size:16px;}
+  .logos{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:5px;overflow:hidden;}
+  .logos div{background:var(--paper);height:100px;display:flex;align-items:center;
+    justify-content:center;padding:20px 22px;}
+  .logos img{max-height:100%;max-width:100%;width:auto;object-fit:contain;
+    transition:transform .2s ease;}
+  .logos div:hover img{transform:scale(1.05);}
+  @media (max-width:860px){.logos{grid-template-columns:repeat(3,1fr);}
+    .logos div:nth-child(10){grid-column:2;}}
+  @media (max-width:520px){.logos{grid-template-columns:repeat(2,1fr);}
+    .logos div{height:82px;padding:16px;} .logos div:nth-child(10){grid-column:auto;}}
+
+  /* lanes */
+  .lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media (max-width:860px){.lanes{grid-template-columns:1fr;}}
+  .lane{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:7px;
+    overflow:hidden;background:var(--paper);text-decoration:none;min-width:0;
+    transition:border-color .18s ease,transform .18s ease;}
+  .lane:hover{border-color:var(--violet-lite);transform:translateY(-3px);}
+  .lane:focus-visible{outline:3px solid var(--violet);outline-offset:3px;}
+  .lane img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+  .lane .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .lane h4{font-size:18px;font-weight:800;letter-spacing:-.018em;}
+  .lane p{font-size:14.5px;color:var(--muted);line-height:1.5;flex:1;}
+  .lane .go{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--violet-ink);display:inline-flex;align-items:center;gap:8px;}
+  .lane .go svg{width:15px;height:11px;transition:transform .2s ease;}
+  .lane:hover .go svg{transform:translateX(4px);}
+
+  /* services strip */
+  .svcs{background:var(--ink);color:#fff;}
+  .svcs .wrap{padding-block:44px;display:flex;flex-wrap:wrap;align-items:center;
+    justify-content:space-between;gap:20px;}
+  .svcs .t{display:flex;flex-direction:column;gap:7px;min-width:0;}
+  .svcs h3{font-size:clamp(20px,2.6vw,27px);font-weight:800;letter-spacing:-.025em;}
+  .svcs h3 .serif{color:var(--violet-lite);}
+  .svcs p{color:#BDB1CA;font-size:15px;}
+  .pills{display:flex;flex-wrap:wrap;gap:7px;}
+  .pills span{font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;color:#E7DEEF;}
+
+  /* cta */
+  .cta{background:var(--violet);color:#fff;}
+  .cta .wrap{padding-block:50px;display:flex;flex-wrap:wrap;align-items:center;
+    justify-content:space-between;gap:22px;}
+  .cta .t{display:flex;flex-direction:column;gap:8px;max-width:52ch;min-width:0;}
+  .cta h3{font-size:clamp(23px,3vw,32px);font-weight:800;letter-spacing:-.025em;}
+  .cta p{color:#EBDCFA;font-size:16px;}
+  .btn.light{background:#fff;color:var(--violet-ink);}
+  .btn.light:hover{background:#F3E8FD;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-txt">
+      <span class="eyebrow" style="color:var(--violet-lite)">Bay Area &middot; DJ, MC &amp; production</span>
+      <h2>Stadiums, boardrooms, <span class="serif">dance floors.</span></h2>
+      <p>Jaymeebaaby runs music, sound, lighting and capture for corporate events, brand
+      activations, weddings and private parties across the Bay Area.</p>
+      <div class="hero-cta">
+        <a class="btn" href="https://www.jaymeebaaby.com/connect" target="_top">Book Jaymeebaaby<svg viewBox="0 0 17 12" fill="none" aria-hidden="true"><path d="M1 6h14M10.5 1L15.5 6l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <small>Written quote back within 24 hours.</small>
+      </div>
+    </div>
+    <div class="shot">
+      <img src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/49ers-levis-stadium.jpg"
+           alt="Jaymeebaaby DJing at Levi&rsquo;s Stadium">
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROOF ══ -->
+<div class="proof">
+  <div class="wrap">
+    <div class="stat"><b>49ers &middot; Giants &middot; A&rsquo;s</b><span>Stadium and in-game sets</span></div>
+    <div class="stat"><b>Outside Lands</b><span>Festival main stages</span></div>
+    <div class="stat"><b>99.7 NOW</b><span>Mixshow DJ, KMVQ</span></div>
+    <div class="stat"><b>Adobe &middot; Salesforce</b><span>Brand activations</span></div>
+  </div>
+</div>
+
+<!-- ══ LOGOS ══ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Trusted by</span>
+      <h3>Brands and teams she&rsquo;s already worked with.</h3>
+    </div>
+    <div class="logos">
+      <div><img src="https://static.wixstatic.com/media/fe5d44_3645928bc93f435d9ecf15543109dd8b~mv2.png" alt="Adobe"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_d0c1b1a29fba45cdb05f895f6b2644ca~mv2.png" alt="Salesforce"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_13dd017b29ec4efdbc2f9dfe85a22591~mv2.webp" alt="LinkedIn"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_259543cea7cf4e4c951f188bae0c6a78~mv2.png" alt="Macy's"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_4dc5a5a2d330460281a1c9fd9e05ff53~mv2.png" alt="Clinique"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_a272b5bd3aaa48939632494ced53ca12~mv2.png" alt="Alo Yoga"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_ee53e241f6b8438c83f4ccaad79bf7ed~mv2.png" alt="Ghirardelli"></div>
+      <div><img src="https://static.wixstatic.com/media/6426b8_dd6236ef4a6f4419aec451b9e2991867~mv2.png" alt="Converse"></div>
+      <div><img src="https://static.wixstatic.com/media/6426b8_56364e17fc1f4edea48baf8a42f53134~mv2.png" alt="San Francisco Giants"></div>
+      <div><img src="https://static.wixstatic.com/media/fe5d44_5dc895f8a4c54c41ad46d9943d3f7b7d~mv2.png" alt="Oakland Athletics"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES STRIP ══ -->
+<div class="svcs">
+  <div class="wrap">
+    <div class="t">
+      <h3>One team, <span class="serif">one quote.</span></h3>
+      <p>Everything the room needs comes from the same place, on a single invoice.</p>
+    </div>
+    <div class="pills">
+      <span>DJ</span><span>MC</span><span>Audio production</span>
+      <span>Lighting</span><span>Photo booth</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LANES ══ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What she does</span>
+      <h3>Pick the room you&rsquo;re filling.</h3>
+    </div>
+    <div class="lanes">
+      <a class="lane" href="https://www.jaymeebaaby.com/corporate" target="_top">
+        <img src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/paypal-park.jpg"
+             alt="Jaymeebaaby billed on the PayPal Park videoboard">
+        <div class="body">
+          <h4>Corporate &amp; brand activations</h4>
+          <p>Conferences, product launches, holiday parties and sponsor activations &mdash;
+          with the sound, lighting and capture handled too.</p>
+          <span class="go">See the work<svg viewBox="0 0 15 11" fill="none" aria-hidden="true"><path d="M1 5.5h12M9 1l4 4.5-4 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+      <a class="lane" href="https://www.jaymeebaaby.com/weddings-events" target="_top">
+        <img src="https://static.wixstatic.com/media/6426b8_fde9c356cba2409398bcb3cc4bb14181~mv2.jpg"
+             alt="Wedding reception">
+        <div class="body">
+          <h4>Weddings &amp; private events</h4>
+          <p>Ceremony, cocktail hour and reception, plus birthdays, anniversaries and
+          milestone parties. She MCs the whole program.</p>
+          <span class="go">See the work<svg viewBox="0 0 15 11" fill="none" aria-hidden="true"><path d="M1 5.5h12M9 1l4 4.5-4 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+      <a class="lane" href="https://www.jaymeebaaby.com/mixes" target="_top">
+        <img src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/997-now-radio.jpg"
+             alt="Jaymeebaaby, 99.7 NOW mixshow">
+        <div class="body">
+          <h4>Watch &amp; listen</h4>
+          <p>The Lover Girl R&amp;B series, full SoundCloud mixes and live sets from
+          festivals, stadiums and late-night rooms.</p>
+          <span class="go">Press play<svg viewBox="0 0 15 11" fill="none" aria-hidden="true"><path d="M1 5.5h12M9 1l4 4.5-4 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<div class="cta">
+  <div class="wrap">
+    <div class="t">
+      <h3>Check your date.</h3>
+      <p>Send the date, the venue and roughly how many people. You&rsquo;ll get a written quote
+      back covering everything the room needs.</p>
+    </div>
+    <a class="btn light" href="https://www.jaymeebaaby.com/connect" target="_top">Book Jaymeebaaby<svg viewBox="0 0 17 12" fill="none" aria-hidden="true"><path d="M1 6h14M10.5 1L15.5 6l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</div>
+
+</body>
+</html>

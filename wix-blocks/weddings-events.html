@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Weddings &amp; Corporate — block</title>
+<title>Weddings &amp; Events — block</title>
 <!--
-  WIX EMBED BLOCK — Weddings & Corporate  (page: /weddings-corporate)
-  ===================================================================
+  WIX EMBED BLOCK — Weddings & Events  (page: /weddings-events)
+  =============================================================
+  Corporate work moved to its own page. This one is weddings and private
+  events only: receptions, ceremonies, birthdays, anniversaries, milestones.
   Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
   Height is noted at the bottom of this comment.
 
@@ -14,7 +16,7 @@
   Everything on this page is driven by the ITEMS list at the bottom of
   this file. One entry per example:
 
-      { type:"wedding",   // "wedding" or "corporate" — drives the filter
+      { type:"wedding",   // "wedding" or "private" — drives the filter
         title:"...",      // what shows on the card
         meta:"...",       // venue, brand, month/year
         thumb:"https://static.wixstatic.com/...",   // Wix Media Manager > Copy URL
@@ -28,14 +30,14 @@
   page is never empty. Replace them as real clips come in.
 
   ── HEIGHT ─────────────────────────────────────────────────────────
-  Measured 1072px at 1280 wide, 2245px at 400 wide (6 entries).
-  Set the Wix element to 1150px desktop / 2350px mobile.
+  Measured 758px at 1280 wide, 1393px at 400 wide (3 entries).
+  Set the Wix element to 820px desktop / 1470px mobile.
   Three cards per row on desktop, so the height grows by ~330px desktop /
   ~380px mobile for every extra row of entries. Re-check after adding.
 
   NATIVE WIX TEXT to put ABOVE this block (iframe text isn't indexed):
-    H1: Wedding & Corporate Event DJ — Bay Area
-    Page SEO title: Wedding & Corporate DJ Bay Area | Jaymeebaaby
+    H1: Wedding & Private Event DJ — Bay Area
+    Page SEO title: Bay Area Wedding DJ & MC | Private Events | Jaymeebaaby
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -130,16 +132,12 @@
 
 <div class="wrap">
   <div class="head">
-    <span class="eyebrow">Weddings &amp; corporate</span>
+    <span class="eyebrow">Weddings &amp; private events</span>
     <h2>Every room, <span class="serif">on the record.</span></h2>
     <p>Receptions, ceremonies, conferences and brand activations — see the work before you book it.</p>
   </div>
 
-  <div class="filters" role="group" aria-label="Filter examples">
-    <button type="button" data-filter="all" aria-pressed="true">All</button>
-    <button type="button" data-filter="wedding" aria-pressed="false">Weddings</button>
-    <button type="button" data-filter="corporate" aria-pressed="false">Corporate</button>
-  </div>
+  <div class="filters" id="filters" role="group" aria-label="Filter examples"></div>
 
   <div class="grid" id="grid"></div>
   <p class="empty" id="empty" hidden>Nothing here yet.</p>
@@ -159,7 +157,7 @@
 <script>
 /* ═══ EDIT HERE ═══ One entry per example. See the notes at the top of this file. ═══ */
 var ITEMS = [
-  { type:"wedding", title:"Ballroom reception", meta:"Bay Area · full setup",
+  { type:"wedding", title:"Ballroom reception", meta:"Bay Area &middot; full setup",
     thumb:"https://static.wixstatic.com/media/6426b8_305ed4ff1b724799bfa6ed6e031c4aecf003.jpg",
     url:"" },
   { type:"wedding", title:"Reception &amp; dance floor", meta:"Bay Area",
@@ -167,20 +165,15 @@ var ITEMS = [
     url:"" },
   { type:"wedding", title:"Outdoor reception", meta:"Bay Area",
     thumb:"https://static.wixstatic.com/media/6426b8_946a4f88181148b681df1f92e50a83f4~mv2.jpg",
-    url:"" },
-  { type:"corporate", title:"R&amp;B Night", meta:"Cal Academy of Sciences",
-    thumb:"https://static.wixstatic.com/media/fe5d44_34e0b8a711324014a49d7b74ecfa3262f002.jpg",
-    url:"" },
-  { type:"corporate", title:"In-game DJ", meta:"San Francisco Giants · Oracle Park",
-    thumb:"https://static.wixstatic.com/media/fe5d44_efea48fc84394fbfa8b8109b262e94e8f002.jpg",
-    url:"" },
-  { type:"corporate", title:"AAPI Night", meta:"Oakland Athletics",
-    thumb:"https://static.wixstatic.com/media/6426b8_f4a49101b9fa4985a647beccb5d8782bf002.jpg",
     url:"" }
+  // Private events need photos — add entries with type:"private" and the
+  // "Private events" filter appears on its own.
 ];
+
 /* ═══ nothing below needs editing ═══ */
 
-var LABEL = { wedding:"Wedding", corporate:"Corporate" };
+var LABEL = { wedding:"Wedding", private:"Private event" };
+var PLURAL = { wedding:"Weddings", private:"Private events" };
 
 function embedUrl(u){
   var m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
@@ -227,14 +220,27 @@ function render(filter){
   empty.hidden = shown > 0;
 }
 
-document.querySelectorAll(".filters button").forEach(function(b){
-  b.addEventListener("click", function(){
-    document.querySelectorAll(".filters button").forEach(function(o){
-      o.setAttribute("aria-pressed", String(o === b));
+(function buildFilters(){
+  var bar = document.getElementById("filters");
+  var types = [];
+  ITEMS.forEach(function(i){ if (types.indexOf(i.type) === -1) types.push(i.type); });
+  if (types.length < 2) return;            // one category only — no filter needed
+  [["all","All"]].concat(types.map(function(t){ return [t, PLURAL[t] || t]; }))
+    .forEach(function(pair, idx){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("data-filter", pair[0]);
+      b.setAttribute("aria-pressed", String(idx === 0));
+      b.textContent = pair[1];
+      b.addEventListener("click", function(){
+        bar.querySelectorAll("button").forEach(function(o){
+          o.setAttribute("aria-pressed", String(o === b));
+        });
+        render(pair[0]);
+      });
+      bar.appendChild(b);
     });
-    render(b.getAttribute("data-filter"));
-  });
-});
+})();
 
 render("all");
 </script>
