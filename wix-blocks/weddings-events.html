@@ -7,38 +7,33 @@
 <!--
   WIX EMBED BLOCK — Weddings & Events  (page: /weddings-events)
   =============================================================
-  Corporate work moved to its own page. This one is weddings and private
-  events only: receptions, ceremonies, birthdays, anniversaries, milestones.
-  Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
-  Height is noted at the bottom of this comment.
+  Four event types rather than a filtered gallery: Weddings, Proms,
+  Holiday parties, Social parties.
 
-  ── ADDING A VIDEO ─────────────────────────────────────────────────
-  Everything on this page is driven by the ITEMS list at the bottom of
-  this file. One entry per example:
+  ── SWAP A PHOTO ───────────────────────────────────────────────
+  Wix > Media Manager > upload > Copy URL, then replace the src on the
+  matching data-slot. Each type appears TWICE — once in the visible set and
+  once in the aria-hidden duplicate that makes the phone row loop. Change
+  both to the same URL.
 
-      { type:"wedding",   // "wedding" or "event" — drives the filter
-        title:"...",      // what shows on the card
-        meta:"...",       // venue, brand, month/year
-        thumb:"https://static.wixstatic.com/...",   // Wix Media Manager > Copy URL
-        url:"https://youtu.be/XXXX" }               // leave "" for photo-only
+    type-weddings / type-proms / type-holiday / type-social
 
-  YouTube and Vimeo links play inline when clicked. Instagram and TikTok
-  links can't embed, so those cards open in a new tab instead.
-  An entry with url:"" stays a plain photo with no play badge.
+  ** type-proms and type-holiday are stand-ins — neither photo is a prom or a
+     holiday party. Swap before this goes live. **
 
-  The seeded entries below use photos already in her Wix library so the
-  page is never empty. Replace them as real clips come in.
+  Photos load from the repo for now; upload to Wix Media Manager and
+  find/replace https://gabrielgalarza.github.io/jaymeebaaby-website/images/
+  before launch.
 
-  ── HEIGHT ─────────────────────────────────────────────────────────
-  Measured 1072px at 1280 wide, 835px at 400 wide (4 entries).
-  Set the Wix element to 1150px desktop / 900px mobile.
-  Phones get one drifting row, so extra entries barely change the mobile height.
-  Three cards per row on desktop, so the height grows by ~330px desktop /
-  ~380px mobile for every extra row of entries. Re-check after adding.
+  ── HEIGHT ─────────────────────────────────────────────────────
+  Measured 847px at 1280 wide, 921px at 400 wide.
+  Set the Wix element to 920px desktop / 1000px mobile.
+  Overshooting is safe — the body background matches the dark CTA band, so
+  extra height reads as that band continuing. Only undershooting clips.
 
-  NATIVE WIX TEXT to put ABOVE this block (iframe text isn't indexed):
-    H1: Wedding & Private Event DJ — Bay Area
-    Page SEO title: Bay Area Wedding DJ & MC | Private Events | Jaymeebaaby
+  NATIVE WIX TEXT above this block (iframe text isn't indexed):
+    H1: Wedding, Prom & Party DJ — Bay Area
+    Page SEO title: Bay Area Wedding, Prom & Party DJ | Jaymeebaaby
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,76 +51,45 @@
   body{background:var(--ink);color:var(--ink);font-family:var(--display);
     font-weight:500;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
   img{max-width:100%;display:block;}
-  h2,h3{margin:0;text-wrap:balance;}
+  h2,h3,h4{margin:0;text-wrap:balance;}
   p{margin:0;}
   .wrap{max-width:1180px;margin:0 auto;padding-inline:24px;}
-  body > .wrap{background:var(--paper);padding-bottom:46px;}
+  body > .wrap{background:var(--paper);padding-bottom:52px;}
   .eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
     color:var(--violet);}
   .serif{font-family:var(--serif);font-style:italic;font-weight:400;}
 
-  .head{padding-block:54px 26px;display:flex;flex-direction:column;gap:11px;}
+  .head{padding-block:54px 28px;display:flex;flex-direction:column;gap:11px;}
   .head h2{font-size:clamp(27px,3.6vw,40px);font-weight:800;letter-spacing:-.028em;
     line-height:1.06;max-width:20ch;}
   .head h2 .serif{color:var(--violet);}
   .head p{color:var(--muted);font-size:16.5px;max-width:56ch;}
 
-  /* filter */
-  .filters{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:26px;}
-  .filters button{font-family:var(--display);font-size:12px;font-weight:800;
-    letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:999px;
-    border:1px solid var(--line);background:var(--paper);color:var(--muted);cursor:pointer;
-    transition:background .15s ease,color .15s ease,border-color .15s ease;}
-  .filters button:hover{border-color:var(--violet-lite);color:var(--violet-ink);}
-  .filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff;}
-  .filters button:focus-visible{outline:3px solid var(--violet);outline-offset:2px;}
-
-  /* grid */
-  .grid{padding-bottom:12px;}
-
-  /* Phone: card rows drift sideways instead of stacking */
-  .vtrack{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-  .vtrack .dup{display:none;}
-  @media (max-width:900px){.vtrack{grid-template-columns:repeat(2,1fr);}}
+  /* four types — a row on desktop, one drifting row on phones */
+  .types{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .types .dup{display:none;}
+  @media (max-width:900px){.types{grid-template-columns:repeat(2,1fr);}}
   @media (max-width:620px){
-    .grid{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+    .typebox{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
       -webkit-mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);
       mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);}
-    .grid::-webkit-scrollbar{display:none;}
-    .vtrack{display:flex;gap:14px;width:max-content;animation:drift 52s linear infinite;}
-    .vtrack .dup{display:flex;}
-    .card{flex:0 0 min(78vw,320px);}
+    .typebox::-webkit-scrollbar{display:none;}
+    .types{display:flex;gap:14px;width:max-content;animation:drift 44s linear infinite;}
+    .types .dup{display:flex;}
+    .type{flex:0 0 min(74vw,290px);}
   }
   @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-50%);}}
   .marq:hover,.marq:focus-within{animation-play-state:paused;}
   @media (prefers-reduced-motion:reduce){.marq{animation:none!important;}}
 
-  .card{display:flex;flex-direction:column;gap:11px;min-width:0;}
-  .shot{position:relative;border-radius:6px;overflow:hidden;background:var(--ink);
-    aspect-ratio:16/9;width:100%;border:0;padding:0;display:block;cursor:default;}
-  .card.playable .shot{cursor:pointer;}
-  .shot img{width:100%;height:100%;object-fit:cover;opacity:.95;
-    transition:transform .4s ease,opacity .2s ease;}
-  .card.playable .shot:hover img{transform:scale(1.045);opacity:1;}
-  .shot iframe{width:100%;height:100%;border:0;display:block;}
-  .shot:focus-visible{outline:3px solid var(--violet);outline-offset:3px;}
-  .play{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
-    pointer-events:none;}
-  .card.playable .play{display:flex;}
-  .play i{width:56px;height:56px;border-radius:50%;background:rgba(122,33,201,.94);
-    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.4);
-    transition:transform .2s ease;}
-  .play i::after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;
-    border-bottom:10px solid transparent;margin-left:4px;}
-  .card.playable .shot:hover .play i{transform:scale(1.08);}
-  .tag{position:absolute;top:11px;left:11px;z-index:2;font-size:10px;font-weight:800;
-    letter-spacing:.13em;text-transform:uppercase;padding:5px 10px;border-radius:999px;
-    background:rgba(18,14,22,.78);color:#fff;backdrop-filter:blur(4px);}
-  .meta{display:flex;flex-direction:column;gap:2px;min-width:0;}
-  .meta b{font-size:15px;font-weight:800;letter-spacing:-.012em;}
-  .meta span{font-size:13px;color:var(--muted);font-weight:600;}
-
-  .empty{padding:44px 0 10px;color:var(--muted);font-size:15px;}
+  .type{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:7px;
+    overflow:hidden;background:var(--paper);min-width:0;
+    transition:border-color .18s ease,transform .18s ease;}
+  .type:hover{border-color:var(--violet-lite);transform:translateY(-3px);}
+  .type img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+  .type .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:7px;flex:1;}
+  .type h4{font-size:17px;font-weight:800;letter-spacing:-.018em;}
+  .type p{font-size:14.5px;color:var(--muted);line-height:1.5;}
 
   /* cta */
   .cta{background:var(--ink);color:#fff;}
@@ -149,15 +113,91 @@
 
 <div class="wrap">
   <div class="head">
-    <span class="eyebrow">Weddings &amp; private events</span>
-    <h2>Every room, <span class="serif">on the record.</span></h2>
-    <p>Ceremonies, receptions, birthdays and milestones &mdash; see the work before you book it.</p>
+    <span class="eyebrow">Weddings &amp; events</span>
+    <h2>Four kinds of room, <span class="serif">one DJ who reads them.</span></h2>
+    <p>Open format, MC included, with sound, lighting and a photo booth available on the
+    same quote.</p>
   </div>
 
-  <div class="filters" id="filters" role="group" aria-label="Filter examples"></div>
+  <div class="typebox">
+    <div class="types marq">
+      <article class="type">
+        <img data-slot="type-weddings"
+             src="https://static.wixstatic.com/media/6426b8_fde9c356cba2409398bcb3cc4bb14181~mv2.jpg"
+             alt="Wedding reception">
+        <div class="body">
+          <h4>Weddings</h4>
+          <p>Ceremony, cocktail hour and reception &mdash; with the mics and cues for
+          speeches handled too.</p>
+        </div>
+      </article>
+      <article class="type">
+        <!-- STAND-IN PHOTO — not a prom. Swap before launch. -->
+        <img data-slot="type-proms"
+             src="https://static.wixstatic.com/media/fe5d44_34e0b8a711324014a49d7b74ecfa3262f002.jpg"
+             alt="Packed dance floor">
+        <div class="body">
+          <h4>Proms</h4>
+          <p>School dances and formals, clean edits throughout, and a floor that stays
+          full all night.</p>
+        </div>
+      </article>
+      <article class="type">
+        <!-- STAND-IN PHOTO — not a holiday party. Swap before launch. -->
+        <img data-slot="type-holiday"
+             src="https://static.wixstatic.com/media/6426b8_305ed4ff1b724799bfa6ed6e031c4aecf003.jpg"
+             alt="Formal party room">
+        <div class="body">
+          <h4>Holiday parties</h4>
+          <p>Company and private holiday nights, from dinner in the background to the
+          late dance floor.</p>
+        </div>
+      </article>
+      <article class="type">
+        <img data-slot="type-social"
+             src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/ballys-lake-tahoe.jpg"
+             alt="Jaymeebaaby billed at Bally&rsquo;s Lake Tahoe">
+        <div class="body">
+          <h4>Social parties</h4>
+          <p>Birthdays, anniversaries, graduations, reunions &mdash; and venue nights
+          like Bally&rsquo;s Lake Tahoe.</p>
+        </div>
+      </article>
 
-  <div class="grid" id="grid"></div>
-  <p class="empty" id="empty" hidden>Nothing here yet.</p>
+      <article class="type dup" aria-hidden="true">
+        <img src="https://static.wixstatic.com/media/6426b8_fde9c356cba2409398bcb3cc4bb14181~mv2.jpg" alt="Wedding reception">
+        <div class="body">
+          <h4>Weddings</h4>
+          <p>Ceremony, cocktail hour and reception &mdash; with the mics and cues for
+          speeches handled too.</p>
+        </div>
+      </article>
+      <article class="type dup" aria-hidden="true">
+        <img src="https://static.wixstatic.com/media/fe5d44_34e0b8a711324014a49d7b74ecfa3262f002.jpg" alt="Packed dance floor">
+        <div class="body">
+          <h4>Proms</h4>
+          <p>School dances and formals, clean edits throughout, and a floor that stays
+          full all night.</p>
+        </div>
+      </article>
+      <article class="type dup" aria-hidden="true">
+        <img src="https://static.wixstatic.com/media/6426b8_305ed4ff1b724799bfa6ed6e031c4aecf003.jpg" alt="Formal party room">
+        <div class="body">
+          <h4>Holiday parties</h4>
+          <p>Company and private holiday nights, from dinner in the background to the
+          late dance floor.</p>
+        </div>
+      </article>
+      <article class="type dup" aria-hidden="true">
+        <img src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/ballys-lake-tahoe.jpg" alt="Jaymeebaaby billed at Bally&rsquo;s Lake Tahoe">
+        <div class="body">
+          <h4>Social parties</h4>
+          <p>Birthdays, anniversaries, graduations, reunions &mdash; and venue nights
+          like Bally&rsquo;s Lake Tahoe.</p>
+        </div>
+      </article>
+    </div>
+  </div>
 </div>
 
 <div class="cta">
@@ -172,114 +212,12 @@
 </div>
 
 <script>
-/* ═══ EDIT HERE ═══ One entry per example. See the notes at the top of this file. ═══ */
-var ITEMS = [
-  { type:"wedding", title:"Ballroom reception", meta:"Bay Area &middot; full setup",
-    thumb:"https://static.wixstatic.com/media/6426b8_305ed4ff1b724799bfa6ed6e031c4aecf003.jpg",
-    url:"" },
-  { type:"wedding", title:"Reception &amp; dance floor", meta:"Bay Area",
-    thumb:"https://static.wixstatic.com/media/6426b8_fde9c356cba2409398bcb3cc4bb14181~mv2.jpg",
-    url:"" },
-  { type:"wedding", title:"Outdoor reception", meta:"Bay Area",
-    thumb:"https://static.wixstatic.com/media/6426b8_946a4f88181148b681df1f92e50a83f4~mv2.jpg",
-    url:"" },
-  { type:"event", title:"Bally&rsquo;s Lake Tahoe", meta:"Headline billing &middot; BLU Nightclub",
-    thumb:"https://gabrielgalarza.github.io/jaymeebaaby-website/images/ballys-lake-tahoe.jpg",
-    url:"" }
-  // Add more with type:"event" — birthdays, anniversaries, milestones, venue dates.
-];
-
-/* ═══ nothing below needs editing ═══ */
-
-var LABEL = { wedding:"Wedding", event:"Event" };
-var PLURAL = { wedding:"Weddings", event:"Events" };
-
-function embedUrl(u){
-  var m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
-  if (m) return "https://www.youtube.com/embed/" + m[1] + "?autoplay=1&rel=0";
-  m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
-  if (m) return "https://player.vimeo.com/video/" + m[1] + "?autoplay=1";
-  return null;
-}
-
-var grid = document.getElementById("grid"), empty = document.getElementById("empty");
-
-
-/* A moving row is hard to tap, so the first press parks it. */
-function parkOnTouch(track){
-  (track.parentElement || track).addEventListener("pointerdown", function(){
-    track.style.animationPlayState = "paused";
-  }, { passive:true });
-}
-
-function buildCard(it, isDup){
-  var card = document.createElement("div");
-  card.className = "card" + (it.url ? " playable" : "") + (isDup ? " dup" : "");
-  if (isDup) card.setAttribute("aria-hidden", "true");
-  var btn = document.createElement(it.url ? "button" : "div");
-  btn.className = "shot";
-  if (it.url) {
-    btn.type = "button";
-    btn.setAttribute("aria-label", "Play " + it.title);
-    if (isDup) btn.tabIndex = -1;
-  }
-  btn.innerHTML =
-    '<span class="tag">' + LABEL[it.type] + '</span>' +
-    '<img src="' + it.thumb + '" alt="' + it.title + '">' +
-    '<span class="play"><i></i></span>';
-  if (it.url) {
-    btn.addEventListener("click", function(){
-      var e = embedUrl(it.url);
-      if (e) {
-        btn.innerHTML = '<iframe src="' + e + '" title="' + it.title +
-          '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
-      } else {
-        window.open(it.url, "_blank", "noopener");
-      }
-    });
-  }
-  var meta = document.createElement("div");
-  meta.className = "meta";
-  meta.innerHTML = "<b>" + it.title + "</b><span>" + it.meta + "</span>";
-  card.appendChild(btn); card.appendChild(meta);
-  return card;
-}
-
-function render(filter){
-  grid.innerHTML = "";
-  var shown = ITEMS.filter(function(it){ return filter === "all" || it.type === filter; });
-  var track = document.createElement("div");
-  track.className = "vtrack marq";
-  shown.forEach(function(it){ track.appendChild(buildCard(it, false)); });
-  shown.forEach(function(it){ track.appendChild(buildCard(it, true)); });
-  grid.appendChild(track);
-  parkOnTouch(track);
-  empty.hidden = shown.length > 0;
-}
-
-(function buildFilters(){
-  var bar = document.getElementById("filters");
-  var types = [];
-  ITEMS.forEach(function(i){ if (types.indexOf(i.type) === -1) types.push(i.type); });
-  if (types.length < 2) return;            // one category only — no filter needed
-  [["all","All"]].concat(types.map(function(t){ return [t, PLURAL[t] || t]; }))
-    .forEach(function(pair, idx){
-      var b = document.createElement("button");
-      b.type = "button";
-      b.setAttribute("data-filter", pair[0]);
-      b.setAttribute("aria-pressed", String(idx === 0));
-      b.textContent = pair[1];
-      b.addEventListener("click", function(){
-        bar.querySelectorAll("button").forEach(function(o){
-          o.setAttribute("aria-pressed", String(o === b));
-        });
-        render(pair[0]);
-      });
-      bar.appendChild(b);
-    });
-})();
-
-render("all");
+  /* A moving row is hard to tap, so the first press parks it. */
+  document.querySelectorAll(".marq").forEach(function (track) {
+    (track.parentElement || track).addEventListener("pointerdown", function () {
+      track.style.animationPlayState = "paused";
+    }, { passive: true });
+  });
 </script>
 </body>
 </html>
