@@ -8,8 +8,8 @@
   WIX EMBED BLOCK — Corporate & Brand Activations   (v3)
   ======================================================
   Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
-  HEIGHT — measured 2429px at 1280 wide, 2312px at 400 wide.
-  Set the Wix element to 2520px desktop / 2410px mobile.
+  HEIGHT — measured 2361px at 1280 wide, 2286px at 400 wide.
+  Set the Wix element to 2450px desktop / 2380px mobile.
   Overshooting is safe — the body background matches the final violet band, so
   extra height reads as that band continuing. Only undershooting clips.
   Re-check after swapping photos.
@@ -162,7 +162,16 @@
   @media (max-width:620px){.rail article{flex:0 0 78%;}}
 
   /* ══ WORK — same snap carousel ══ */
-  .tile{position:relative;flex:0 0 clamp(250px,30%,340px);scroll-snap-align:start;
+  .wtrack{display:flex;gap:16px;width:max-content;flex:0 0 auto;}
+  .wtrack .dup{display:none;}
+  @media (max-width:620px){
+    #workrail{scroll-snap-type:none;
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);
+      mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);}
+    .wtrack{animation:drift 46s linear infinite;}
+    .wtrack .dup{display:block;}
+  }
+  .tile{position:relative;flex:0 0 320px;scroll-snap-align:start;
     border-radius:6px;overflow:hidden;background:var(--ink);display:block;
     text-decoration:none;color:#fff;min-width:0;}
   .tile img{width:100%;aspect-ratio:4/3;object-fit:cover;opacity:.92;
@@ -182,22 +191,7 @@
     border-bottom:7px solid transparent;margin-left:3px;}
   .tile.has-video .pv{display:flex;}
   .tile:focus-visible{outline:3px solid var(--violet);outline-offset:3px;}
-  @media (max-width:620px){.tile{flex:0 0 78%;}}
-
-  .roster{margin-top:18px;}
-  .rtrack{display:flex;flex-wrap:wrap;gap:8px;}
-  .rtrack .dup{display:none;}
-  .rtrack span{font-size:13px;font-weight:700;color:var(--muted);background:var(--paper);
-    border:1px solid var(--line);border-radius:999px;padding:7px 14px;}
-  @media (max-width:620px){
-    .roster{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
-      -webkit-mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent);
-      mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent);}
-    .roster::-webkit-scrollbar{display:none;}
-    .rtrack{flex-wrap:nowrap;width:max-content;animation:drift 24s linear infinite;}
-    .rtrack .dup{display:block;}
-    .rtrack span{flex:0 0 auto;white-space:nowrap;}
-  }
+  @media (max-width:620px){.tile{flex:0 0 min(78vw,320px);}}
 
   /* ══ CTA ══ */
   .cta{background:var(--violet);color:#fff;}
@@ -338,6 +332,7 @@
     </div>
 
     <div class="rail" id="workrail" tabindex="0" role="group" aria-label="Selected work, scrollable">
+      <div class="wtrack marq">
       <a class="tile" data-video="49ers">
         <img data-slot="work-49ers" src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/49ers-levis-stadium.jpg" alt="Jaymeebaaby DJing at Levi&rsquo;s Stadium">
         <span class="badge">Halftime</span>
@@ -375,16 +370,46 @@
         <span class="cap"><b>Outside Lands</b><span>Festival set, 2025</span></span>
         <span class="pv"></span>
       </a>
-    </div>
-
-    <div class="roster">
-      <div class="rtrack marq">
-      <span>Bay FC</span><span>NWSL Championship 2025</span>
-      <span>NFL Flag International Championship 2026</span>
-      <span>LPGA Hanwha LIFEPLUS International Crown</span>
-        <span class="dup" aria-hidden="true">Bay FC</span><span class="dup" aria-hidden="true">NWSL Championship 2025</span><span class="dup" aria-hidden="true">NFL Flag International Championship 2026</span><span class="dup" aria-hidden="true">LPGA Hanwha LIFEPLUS International Crown</span>
+      <a class="tile dup" aria-hidden="true" tabindex="-1" data-video="49ers">
+        <img data-slot="work-49ers" src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/49ers-levis-stadium.jpg" alt="Jaymeebaaby DJing at Levi&rsquo;s Stadium">
+        <span class="badge">Halftime</span>
+        <span class="cap"><b>San Francisco 49ers</b><span>Halftime show with AMP Squad &middot; Levi&rsquo;s Stadium</span></span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile dup" aria-hidden="true" tabindex="-1" data-video="paypal">
+        <img data-slot="work-paypal" src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/paypal-park.jpg" alt="Jaymeebaaby billed on the PayPal Park videoboard">
+        <span class="cap"><b>PayPal Park</b><span>Featured DJ &middot; San Jose</span></span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile dup" aria-hidden="true" tabindex="-1" data-video="seafood">
+        <img data-slot="work-seafood" src="https://img.youtube.com/vi/xY8xBv2kl-4/maxresdefault.jpg" alt="Seafood City Late Night Madness set">
+        <span class="badge">Watch</span>
+        <span class="cap"><b>Seafood City</b><span>Late Night Madness &middot; Daly City</span></span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile dup" aria-hidden="true" tabindex="-1" data-video="blendfest">
+        <img data-slot="work-blendfest" src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/blendfest.jpg" alt="Blendfest Coffee &amp; R&amp;B Festival">
+        <span class="cap"><b>Blendfest</b><span>Coffee &amp; R&amp;B Festival</span></span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile dup" aria-hidden="true" tabindex="-1" data-video="giants">
+        <img data-slot="work-giants" src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/sf-giants-activation.jpg" alt="San Francisco Giants activation">
+        <span class="cap"><b>San Francisco Giants</b><span>In-game DJ &amp; retail activation</span></span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile dup" aria-hidden="true" tabindex="-1" data-video="athletics">
+        <img data-slot="work-as" src="https://gabrielgalarza.github.io/jaymeebaaby-website/images/oakland-athletics.jpg" alt="Oakland Athletics in-game DJ">
+        <span class="cap"><b>Oakland Athletics</b><span>In-game DJ</span></span>
+        <span class="pv"></span>
+      </a>
+      <a class="tile dup" aria-hidden="true" tabindex="-1" data-video="outsidelands">
+        <img data-slot="work-ol" src="https://static.wixstatic.com/media/fe5d44_5e5f2a9f12244b788704adaa8949b11ff002.jpg" alt="Outside Lands crowd">
+        <span class="cap"><b>Outside Lands</b><span>Festival set, 2025</span></span>
+        <span class="pv"></span>
+      </a>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -414,6 +439,13 @@
     "athletics":    "",
     "outsidelands": ""
   };
+  /* A moving row is hard to tap, so the first touch parks it. */
+  document.querySelectorAll(".marq").forEach(function (track) {
+    (track.parentElement || track).addEventListener("pointerdown", function () {
+      track.style.animationPlayState = "paused";
+    }, { passive: true });
+  });
+
   document.querySelectorAll(".tile").forEach(function (t) {
     var url = VIDEOS[t.getAttribute("data-video")];
     if (url) {
