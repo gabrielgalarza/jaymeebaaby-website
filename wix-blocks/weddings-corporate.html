@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weddings &amp; Corporate — block</title>
+<!--
+  WIX EMBED BLOCK — Weddings & Corporate  (page: /weddings-corporate)
+  ===================================================================
+  Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
+  Height is noted at the bottom of this comment.
+
+  ── ADDING A VIDEO ─────────────────────────────────────────────────
+  Everything on this page is driven by the ITEMS list at the bottom of
+  this file. One entry per example:
+
+      { type:"wedding",   // "wedding" or "corporate" — drives the filter
+        title:"...",      // what shows on the card
+        meta:"...",       // venue, brand, month/year
+        thumb:"https://static.wixstatic.com/...",   // Wix Media Manager > Copy URL
+        url:"https://youtu.be/XXXX" }               // leave "" for photo-only
+
+  YouTube and Vimeo links play inline when clicked. Instagram and TikTok
+  links can't embed, so those cards open in a new tab instead.
+  An entry with url:"" stays a plain photo with no play badge.
+
+  The seeded entries below use photos already in her Wix library so the
+  page is never empty. Replace them as real clips come in.
+
+  ── HEIGHT ─────────────────────────────────────────────────────────
+  Measured 1072px at 1280 wide, 2245px at 400 wide (6 entries).
+  Set the Wix element to 1150px desktop / 2350px mobile.
+  Three cards per row on desktop, so the height grows by ~330px desktop /
+  ~380px mobile for every extra row of entries. Re-check after adding.
+
+  NATIVE WIX TEXT to put ABOVE this block (iframe text isn't indexed):
+    H1: Wedding & Corporate Event DJ — Bay Area
+    Page SEO title: Wedding & Corporate DJ Bay Area | Jaymeebaaby
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Instrument+Serif:ital@0&display=swap">
+<style>
+  :root{
+    --ink:#120E16; --muted:#5B5266; --line:#E4DEEA;
+    --paper:#FFFFFF; --alt:#F8F5FB;
+    --violet:#7A21C9; --violet-ink:#5C169B; --violet-lite:#B36BF0;
+    --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+    --serif:'Instrument Serif',Georgia,serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--display);
+    font-weight:500;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  h2,h3{margin:0;text-wrap:balance;}
+  p{margin:0;}
+  .wrap{max-width:1180px;margin:0 auto;padding-inline:24px;}
+  .eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--violet);}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:400;}
+
+  .head{padding-block:54px 26px;display:flex;flex-direction:column;gap:11px;}
+  .head h2{font-size:clamp(27px,3.6vw,40px);font-weight:800;letter-spacing:-.028em;
+    line-height:1.06;max-width:20ch;}
+  .head h2 .serif{color:var(--violet);}
+  .head p{color:var(--muted);font-size:16.5px;max-width:56ch;}
+
+  /* filter */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:26px;}
+  .filters button{font-family:var(--display);font-size:12px;font-weight:800;
+    letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:999px;
+    border:1px solid var(--line);background:var(--paper);color:var(--muted);cursor:pointer;
+    transition:background .15s ease,color .15s ease,border-color .15s ease;}
+  .filters button:hover{border-color:var(--violet-lite);color:var(--violet-ink);}
+  .filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .filters button:focus-visible{outline:3px solid var(--violet);outline-offset:2px;}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:12px;}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.grid{grid-template-columns:1fr;}}
+
+  .card{display:flex;flex-direction:column;gap:11px;min-width:0;}
+  .shot{position:relative;border-radius:6px;overflow:hidden;background:var(--ink);
+    aspect-ratio:16/9;width:100%;border:0;padding:0;display:block;cursor:default;}
+  .card.playable .shot{cursor:pointer;}
+  .shot img{width:100%;height:100%;object-fit:cover;opacity:.95;
+    transition:transform .4s ease,opacity .2s ease;}
+  .card.playable .shot:hover img{transform:scale(1.045);opacity:1;}
+  .shot iframe{width:100%;height:100%;border:0;display:block;}
+  .shot:focus-visible{outline:3px solid var(--violet);outline-offset:3px;}
+  .play{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+    pointer-events:none;}
+  .card.playable .play{display:flex;}
+  .play i{width:56px;height:56px;border-radius:50%;background:rgba(122,33,201,.94);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.4);
+    transition:transform .2s ease;}
+  .play i::after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;
+    border-bottom:10px solid transparent;margin-left:4px;}
+  .card.playable .shot:hover .play i{transform:scale(1.08);}
+  .tag{position:absolute;top:11px;left:11px;z-index:2;font-size:10px;font-weight:800;
+    letter-spacing:.13em;text-transform:uppercase;padding:5px 10px;border-radius:999px;
+    background:rgba(18,14,22,.78);color:#fff;backdrop-filter:blur(4px);}
+  .meta{display:flex;flex-direction:column;gap:2px;min-width:0;}
+  .meta b{font-size:15px;font-weight:800;letter-spacing:-.012em;}
+  .meta span{font-size:13px;color:var(--muted);font-weight:600;}
+
+  .empty{padding:44px 0 10px;color:var(--muted);font-size:15px;}
+
+  /* cta */
+  .cta{background:var(--ink);color:#fff;margin-top:46px;}
+  .cta .wrap{padding-block:48px;display:flex;flex-wrap:wrap;align-items:center;
+    justify-content:space-between;gap:22px;}
+  .cta .txt{display:flex;flex-direction:column;gap:8px;max-width:52ch;min-width:0;}
+  .cta h3{font-size:clamp(22px,2.9vw,30px);font-weight:800;letter-spacing:-.025em;}
+  .cta p{color:#BDB1CA;font-size:15.5px;}
+  .btn{display:inline-flex;align-items:center;gap:11px;background:var(--violet);color:#fff;
+    text-decoration:none;font-size:13.5px;font-weight:800;letter-spacing:.09em;
+    text-transform:uppercase;padding:16px 30px;border-radius:3px;white-space:nowrap;
+    transition:background .15s ease,transform .15s ease;}
+  .btn svg{width:17px;height:12px;flex-shrink:0;transition:transform .2s ease;}
+  .btn:hover{background:var(--violet-ink);transform:translateY(-1px);}
+  .btn:hover svg{transform:translateX(4px);}
+  .btn:focus-visible{outline:3px solid var(--violet-lite);outline-offset:3px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="head">
+    <span class="eyebrow">Weddings &amp; corporate</span>
+    <h2>Every room, <span class="serif">on the record.</span></h2>
+    <p>Receptions, ceremonies, conferences and brand activations — see the work before you book it.</p>
+  </div>
+
+  <div class="filters" role="group" aria-label="Filter examples">
+    <button type="button" data-filter="all" aria-pressed="true">All</button>
+    <button type="button" data-filter="wedding" aria-pressed="false">Weddings</button>
+    <button type="button" data-filter="corporate" aria-pressed="false">Corporate</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>Nothing here yet.</p>
+</div>
+
+<div class="cta">
+  <div class="wrap">
+    <div class="txt">
+      <h3>Check your date.</h3>
+      <p>Send the date, the venue and roughly how many people. You&rsquo;ll get a written quote back
+      covering everything the room needs.</p>
+    </div>
+    <a class="btn" href="https://www.jaymeebaaby.com/connect" target="_top">Book Jaymeebaaby<svg viewBox="0 0 17 12" fill="none" aria-hidden="true"><path d="M1 6h14M10.5 1L15.5 6l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</div>
+
+<script>
+/* ═══ EDIT HERE ═══ One entry per example. See the notes at the top of this file. ═══ */
+var ITEMS = [
+  { type:"wedding", title:"Ballroom reception", meta:"Bay Area · full setup",
+    thumb:"https://static.wixstatic.com/media/6426b8_305ed4ff1b724799bfa6ed6e031c4aecf003.jpg",
+    url:"" },
+  { type:"wedding", title:"Reception &amp; dance floor", meta:"Bay Area",
+    thumb:"https://static.wixstatic.com/media/6426b8_fde9c356cba2409398bcb3cc4bb14181~mv2.jpg",
+    url:"" },
+  { type:"wedding", title:"Outdoor reception", meta:"Bay Area",
+    thumb:"https://static.wixstatic.com/media/6426b8_946a4f88181148b681df1f92e50a83f4~mv2.jpg",
+    url:"" },
+  { type:"corporate", title:"R&amp;B Night", meta:"Cal Academy of Sciences",
+    thumb:"https://static.wixstatic.com/media/fe5d44_34e0b8a711324014a49d7b74ecfa3262f002.jpg",
+    url:"" },
+  { type:"corporate", title:"In-game DJ", meta:"San Francisco Giants · Oracle Park",
+    thumb:"https://static.wixstatic.com/media/fe5d44_efea48fc84394fbfa8b8109b262e94e8f002.jpg",
+    url:"" },
+  { type:"corporate", title:"AAPI Night", meta:"Oakland Athletics",
+    thumb:"https://static.wixstatic.com/media/6426b8_f4a49101b9fa4985a647beccb5d8782bf002.jpg",
+    url:"" }
+];
+/* ═══ nothing below needs editing ═══ */
+
+var LABEL = { wedding:"Wedding", corporate:"Corporate" };
+
+function embedUrl(u){
+  var m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
+  if (m) return "https://www.youtube.com/embed/" + m[1] + "?autoplay=1&rel=0";
+  m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (m) return "https://player.vimeo.com/video/" + m[1] + "?autoplay=1";
+  return null;
+}
+
+var grid = document.getElementById("grid"), empty = document.getElementById("empty");
+
+function render(filter){
+  grid.innerHTML = "";
+  var shown = 0;
+  ITEMS.forEach(function(it){
+    if (filter !== "all" && it.type !== filter) return;
+    shown++;
+    var card = document.createElement("div");
+    card.className = "card" + (it.url ? " playable" : "");
+    var btn = document.createElement(it.url ? "button" : "div");
+    btn.className = "shot";
+    if (it.url) { btn.type = "button"; btn.setAttribute("aria-label", "Play " + it.title); }
+    btn.innerHTML =
+      '<span class="tag">' + LABEL[it.type] + '</span>' +
+      '<img src="' + it.thumb + '" alt="' + it.title + '">' +
+      '<span class="play"><i></i></span>';
+    if (it.url) {
+      btn.addEventListener("click", function(){
+        var e = embedUrl(it.url);
+        if (e) {
+          btn.innerHTML = '<iframe src="' + e + '" title="' + it.title +
+            '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+        } else {
+          window.open(it.url, "_blank", "noopener");
+        }
+      });
+    }
+    var meta = document.createElement("div");
+    meta.className = "meta";
+    meta.innerHTML = "<b>" + it.title + "</b><span>" + it.meta + "</span>";
+    card.appendChild(btn); card.appendChild(meta);
+    grid.appendChild(card);
+  });
+  empty.hidden = shown > 0;
+}
+
+document.querySelectorAll(".filters button").forEach(function(b){
+  b.addEventListener("click", function(){
+    document.querySelectorAll(".filters button").forEach(function(o){
+      o.setAttribute("aria-pressed", String(o === b));
+    });
+    render(b.getAttribute("data-filter"));
+  });
+});
+
+render("all");
+</script>
+</body>
+</html>

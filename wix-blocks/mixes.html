@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mixes &amp; Series — block</title>
+<!--
+  WIX EMBED BLOCK — Mixes & Series  (page: /mixes)
+  ================================================
+  Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
+
+  Three lanes, in this order:
+    1. SoundCloud mixes      — live, embedded from soundcloud.com/jaymeebaaby
+    2. Lover Girl R&B        — the YouTube series
+    3. Party & event sets    — live sets from real rooms
+
+  ── FILL THESE IN ────────────────────────────────────────────────────
+  YT_CHANNEL   her YouTube channel URL   ** I could not find this anywhere,
+                                            it is linked nowhere on the site **
+  SERIES[]     the Lover Girl R&B episodes
+  PARTY[]      party / event sets
+
+  Each entry: { title, meta, thumb, url }
+    thumb — Wix Media Manager > upload > Copy URL, OR a YouTube thumbnail:
+            https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg
+    url   — YouTube or Vimeo links play inline; IG/TikTok open in a new tab;
+            "" leaves the card as a plain photo.
+
+  Lanes with no entries hide themselves, so this is safe to paste before
+  every URL is filled in. NOTE: that means the Lover Girl R&B lane stays
+  INVISIBLE until you add at least one entry to SERIES[].
+
+  ── HEIGHT ───────────────────────────────────────────────────────────
+  Measured 1359px at 1280 wide, 1911px at 400 wide, with the series lane
+  hidden. Set the Wix element to 1450px desktop / 2000px mobile, then add
+  roughly 420px desktop / 1250px mobile once the series lane has a row
+  of three. Re-check after filling it in.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+  :root{
+    --ink:#120E16; --muted:#5B5266; --line:#E4DEEA;
+    --paper:#FFFFFF; --alt:#F8F5FB;
+    --violet:#7A21C9; --violet-ink:#5C169B; --violet-lite:#B36BF0;
+    --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+    --serif:'Instrument Serif',Georgia,serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--display);
+    font-weight:500;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  h2,h3{margin:0;text-wrap:balance;}
+  p{margin:0;}
+  .wrap{max-width:1180px;margin:0 auto;padding-inline:24px;}
+  .eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--violet);}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:400;}
+
+  .head{padding-block:54px 8px;display:flex;flex-direction:column;gap:11px;}
+  .head h2{font-size:clamp(27px,3.6vw,40px);font-weight:800;letter-spacing:-.028em;
+    line-height:1.06;max-width:18ch;}
+  .head h2 .serif{color:var(--violet);}
+  .head p{color:var(--muted);font-size:16.5px;max-width:54ch;}
+
+  section{padding-block:40px;}
+  section.tint{background:var(--alt);}
+  .lane-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+    gap:10px 20px;margin-bottom:22px;}
+  .lane-head .l{display:flex;flex-direction:column;gap:7px;min-width:0;}
+  .lane-head h3{font-size:clamp(20px,2.5vw,27px);font-weight:800;letter-spacing:-.022em;}
+  .lane-head p{color:var(--muted);font-size:15px;}
+  .more{font-size:12.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--violet-ink);text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+    white-space:nowrap;}
+  .more svg{width:15px;height:11px;transition:transform .2s ease;}
+  .more:hover svg{transform:translateX(4px);}
+  .more:focus-visible{outline:3px solid var(--violet);outline-offset:3px;}
+
+  /* soundcloud */
+  .sc{border:1px solid var(--line);border-radius:7px;overflow:hidden;background:var(--paper);}
+  .sc iframe{width:100%;height:420px;border:0;display:block;}
+  @media (max-width:560px){.sc iframe{height:360px;}}
+
+  /* video cards */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.grid{grid-template-columns:1fr;}}
+  .card{display:flex;flex-direction:column;gap:10px;min-width:0;}
+  .shot{position:relative;border-radius:6px;overflow:hidden;background:var(--ink);
+    aspect-ratio:16/9;width:100%;border:0;padding:0;display:block;cursor:default;}
+  .card.playable .shot{cursor:pointer;}
+  .shot img{width:100%;height:100%;object-fit:cover;opacity:.95;
+    transition:transform .4s ease,opacity .2s ease;}
+  .card.playable .shot:hover img{transform:scale(1.045);opacity:1;}
+  .shot iframe{width:100%;height:100%;border:0;display:block;}
+  .shot:focus-visible{outline:3px solid var(--violet);outline-offset:3px;}
+  .play{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+    pointer-events:none;}
+  .card.playable .play{display:flex;}
+  .play i{width:54px;height:54px;border-radius:50%;background:rgba(122,33,201,.94);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.4);
+    transition:transform .2s ease;}
+  .play i::after{content:"";border-left:15px solid #fff;border-top:10px solid transparent;
+    border-bottom:10px solid transparent;margin-left:4px;}
+  .card.playable .shot:hover .play i{transform:scale(1.08);}
+  .ep{position:absolute;top:11px;left:11px;z-index:2;font-size:10px;font-weight:800;
+    letter-spacing:.13em;text-transform:uppercase;padding:5px 10px;border-radius:999px;
+    background:rgba(18,14,22,.78);color:#fff;}
+  .meta{display:flex;flex-direction:column;gap:2px;min-width:0;}
+  .meta b{font-size:15px;font-weight:800;letter-spacing:-.012em;}
+  .meta span{font-size:13px;color:var(--muted);font-weight:600;}
+  .todo{border:1px dashed var(--line);border-radius:7px;padding:26px;color:var(--muted);
+    font-size:15px;background:var(--paper);}
+
+  /* follow strip */
+  .follow{border-top:1px solid var(--line);}
+  .follow .wrap{padding-block:34px;display:flex;flex-wrap:wrap;align-items:center;
+    justify-content:space-between;gap:16px;}
+  .follow b{font-size:15px;font-weight:800;}
+  .links{display:flex;flex-wrap:wrap;gap:9px;}
+  .links a{font-size:12.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+    text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;
+    padding:9px 17px;transition:background .15s ease,color .15s ease,border-color .15s ease;}
+  .links a:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .links a:focus-visible{outline:3px solid var(--violet);outline-offset:2px;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="head">
+    <span class="eyebrow">Mixes &amp; series</span>
+    <h2>Press play, <span class="serif">pick a vibe.</span></h2>
+    <p>Full mixes, the R&amp;B series, and live sets from real rooms.</p>
+  </div>
+</div>
+
+<!-- ══ 1 · SOUNDCLOUD ══ -->
+<section>
+  <div class="wrap">
+    <div class="lane-head">
+      <div class="l">
+        <span class="eyebrow">01 — Mixes</span>
+        <h3>SoundCloud</h3>
+        <p>Full-length mixes, start to finish.</p>
+      </div>
+      <a class="more" href="https://soundcloud.com/jaymeebaaby" target="_blank" rel="noopener">
+        All mixes<svg viewBox="0 0 15 11" fill="none" aria-hidden="true"><path d="M1 5.5h12M9 1l4 4.5-4 4.5"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="sc">
+      <iframe title="Jaymeebaaby on SoundCloud" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jaymeebaaby&color=%237a21c9&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 2 · LOVER GIRL R&B ══ -->
+<section class="tint" id="sec-series" hidden>
+  <div class="wrap">
+    <div class="lane-head">
+      <div class="l">
+        <span class="eyebrow">02 — YouTube series</span>
+        <h3>Lover Girl R&amp;B</h3>
+        <p>The R&amp;B series, episode by episode.</p>
+      </div>
+      <a class="more" id="yt-link" target="_blank" rel="noopener">
+        Subscribe<svg viewBox="0 0 15 11" fill="none" aria-hidden="true"><path d="M1 5.5h12M9 1l4 4.5-4 4.5"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="grid" id="series"></div>
+  </div>
+</section>
+
+<!-- ══ 3 · PARTY & EVENT ══ -->
+<section id="sec-party" hidden>
+  <div class="wrap">
+    <div class="lane-head">
+      <div class="l">
+        <span class="eyebrow">03 — Live</span>
+        <h3>Party &amp; event sets</h3>
+        <p>Festivals, stadiums and packed dance floors.</p>
+      </div>
+    </div>
+    <div class="grid" id="party"></div>
+  </div>
+</section>
+
+<!-- ══ FOLLOW ══ -->
+<div class="follow">
+  <div class="wrap">
+    <b>Follow along</b>
+    <div class="links">
+      <a href="https://www.instagram.com/jaymeebaaby/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@jaymeebaaby" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://soundcloud.com/jaymeebaaby" target="_blank" rel="noopener">SoundCloud</a>
+      <a id="yt-follow" target="_blank" rel="noopener" hidden>YouTube</a>
+      <a href="https://www.facebook.com/Jaymeebaaby-110736491571352" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══ EDIT HERE ═══════════════════════════════════════════════════════ */
+
+/* Her YouTube channel. Leave "" and the Subscribe link + YouTube chip stay hidden. */
+var YT_CHANNEL = "";
+
+/* Lover Girl R&B episodes */
+var SERIES = [
+  // { title:"Lover Girl R&B — Vol. 1", meta:"Episode 1",
+  //   thumb:"https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg",
+  //   url:"https://youtu.be/VIDEO_ID" },
+];
+
+/* Party & event sets */
+var PARTY = [
+  { title:"Outside Lands", meta:"Festival set, 2025",
+    thumb:"https://static.wixstatic.com/media/fe5d44_5e5f2a9f12244b788704adaa8949b11ff002.jpg",
+    url:"" },
+  { title:"San Francisco Giants", meta:"In-game DJ, Oracle Park",
+    thumb:"https://static.wixstatic.com/media/fe5d44_efea48fc84394fbfa8b8109b262e94e8f002.jpg",
+    url:"" },
+  { title:"R&amp;B Night", meta:"Cal Academy of Sciences",
+    thumb:"https://static.wixstatic.com/media/fe5d44_34e0b8a711324014a49d7b74ecfa3262f002.jpg",
+    url:"" }
+];
+
+/* ═══ nothing below needs editing ═══════════════════════════════════ */
+
+function embedUrl(u){
+  var m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
+  if (m) return "https://www.youtube.com/embed/" + m[1] + "?autoplay=1&rel=0";
+  m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (m) return "https://player.vimeo.com/video/" + m[1] + "?autoplay=1";
+  return null;
+}
+
+function fill(mountId, sectionId, items, numbered){
+  var mount = document.getElementById(mountId);
+  if (!items.length) return;
+  document.getElementById(sectionId).hidden = false;
+  items.forEach(function(it, n){
+    var card = document.createElement("div");
+    card.className = "card" + (it.url ? " playable" : "");
+    var btn = document.createElement(it.url ? "button" : "div");
+    btn.className = "shot";
+    if (it.url) { btn.type = "button"; btn.setAttribute("aria-label", "Play " + it.title); }
+    btn.innerHTML =
+      (numbered ? '<span class="ep">Ep. ' + (n + 1) + '</span>' : '') +
+      '<img src="' + it.thumb + '" alt="' + it.title + '">' +
+      '<span class="play"><i></i></span>';
+    if (it.url) {
+      btn.addEventListener("click", function(){
+        var e = embedUrl(it.url);
+        if (e) {
+          btn.innerHTML = '<iframe src="' + e + '" title="' + it.title +
+            '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+        } else {
+          window.open(it.url, "_blank", "noopener");
+        }
+      });
+    }
+    var meta = document.createElement("div");
+    meta.className = "meta";
+    meta.innerHTML = "<b>" + it.title + "</b><span>" + it.meta + "</span>";
+    card.appendChild(btn); card.appendChild(meta);
+    mount.appendChild(card);
+  });
+}
+
+if (YT_CHANNEL) {
+  var a = document.getElementById("yt-link");  a.href = YT_CHANNEL;
+  var f = document.getElementById("yt-follow"); f.href = YT_CHANNEL; f.hidden = false;
+} else {
+  document.getElementById("yt-link").style.display = "none";
+}
+
+fill("series", "sec-series", SERIES, true);
+fill("party",  "sec-party",  PARTY,  false);
+</script>
+</body>
+</html>
