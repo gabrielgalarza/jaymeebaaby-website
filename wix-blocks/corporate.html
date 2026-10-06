@@ -8,8 +8,11 @@
   WIX EMBED BLOCK — Corporate & Brand Activations   (v3)
   ======================================================
   Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
-  HEIGHT — measured 2692px at 1280 wide, 3069px at 400 wide.
-  Set the Wix element to 2780px desktop / 3180px mobile. Re-check after swapping photos.
+  HEIGHT — measured 2684px at 1280 wide, 2755px at 400 wide.
+  Set the Wix element to 2780px desktop / 2860px mobile.
+  Overshooting is safe — the body background matches the final violet band, so
+  extra height reads as that band continuing. Only undershooting clips.
+  Re-check after swapping photos.
 
   ── WHERE THE PHOTOS COME FROM ───────────────────────────────────────
   The event photos load from
@@ -102,18 +105,33 @@
   .sec-head p{color:var(--muted);font-size:16px;}
 
   /* ══ LOGO WALL — 5 × 2, always full ══ */
-  .logos{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);
-    border:1px solid var(--line);border-radius:5px;overflow:hidden;}
-  .logos div{background:var(--paper);height:104px;display:flex;align-items:center;
+  .logos{border:1px solid var(--line);border-radius:5px;overflow:hidden;}
+  .track{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);}
+  .track > div{background:var(--paper);height:100px;display:flex;align-items:center;
     justify-content:center;padding:20px 22px;}
-  .logos img{max-height:100%;max-width:100%;width:auto;object-fit:contain;
+  .track img{max-height:100%;max-width:100%;width:auto;object-fit:contain;
     transition:transform .2s ease;}
-  .logos div:hover img{transform:scale(1.05);}
-  @media (max-width:860px){.logos{grid-template-columns:repeat(3,1fr);}
-    .logos div:nth-child(10){grid-column:2;}}
-  @media (max-width:520px){.logos{grid-template-columns:repeat(2,1fr);}
-    .logos div{height:84px;padding:16px;}
-    .logos div:nth-child(10){grid-column:auto;}}
+  .track > div:hover img{transform:scale(1.05);}
+  .track .dup{display:none;}
+  @media (max-width:860px) and (min-width:621px){
+    .track{grid-template-columns:repeat(3,1fr);}
+    .track > div:nth-child(10){grid-column:2;}
+  }
+  /* Phone: one swipeable row that drifts on its own, instead of five stacked rows */
+  @media (max-width:620px){
+    .logos{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);
+      mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);}
+    .logos::-webkit-scrollbar{display:none;}
+    .track{display:flex;gap:0;width:max-content;background:var(--paper);
+      animation:drift 32s linear infinite;}
+    .track > div{flex:0 0 auto;width:138px;height:78px;padding:16px 18px;
+      border-right:1px solid var(--line);}
+    .track .dup{display:flex;}
+    .logos:hover .track,.logos:focus-within .track{animation-play-state:paused;}
+  }
+  @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion:reduce){.track{animation:none!important;}}
 
   /* ══ SERVICES — equal cards on a snap carousel ══ */
   .sec-bar{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
@@ -225,6 +243,7 @@
       <h3>Brands and teams she&rsquo;s already worked with.</h3>
     </div>
     <div class="logos">
+      <div class="track">
       <div><img src="https://static.wixstatic.com/media/fe5d44_3645928bc93f435d9ecf15543109dd8b~mv2.png" alt="Adobe"></div>
       <div><img src="https://static.wixstatic.com/media/fe5d44_d0c1b1a29fba45cdb05f895f6b2644ca~mv2.png" alt="Salesforce"></div>
       <div><img src="https://static.wixstatic.com/media/fe5d44_13dd017b29ec4efdbc2f9dfe85a22591~mv2.webp" alt="LinkedIn"></div>
@@ -235,6 +254,17 @@
       <div><img src="https://static.wixstatic.com/media/6426b8_dd6236ef4a6f4419aec451b9e2991867~mv2.png" alt="Converse"></div>
       <div><img src="https://static.wixstatic.com/media/6426b8_56364e17fc1f4edea48baf8a42f53134~mv2.png" alt="San Francisco Giants"></div>
       <div><img src="https://static.wixstatic.com/media/fe5d44_5dc895f8a4c54c41ad46d9943d3f7b7d~mv2.png" alt="Oakland Athletics"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/fe5d44_3645928bc93f435d9ecf15543109dd8b~mv2.png" alt="Adobe"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/fe5d44_d0c1b1a29fba45cdb05f895f6b2644ca~mv2.png" alt="Salesforce"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/fe5d44_13dd017b29ec4efdbc2f9dfe85a22591~mv2.webp" alt="LinkedIn"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/fe5d44_259543cea7cf4e4c951f188bae0c6a78~mv2.png" alt="Macy's"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/fe5d44_4dc5a5a2d330460281a1c9fd9e05ff53~mv2.png" alt="Clinique"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/fe5d44_a272b5bd3aaa48939632494ced53ca12~mv2.png" alt="Alo Yoga"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/fe5d44_ee53e241f6b8438c83f4ccaad79bf7ed~mv2.png" alt="Ghirardelli"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/6426b8_dd6236ef4a6f4419aec451b9e2991867~mv2.png" alt="Converse"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/6426b8_56364e17fc1f4edea48baf8a42f53134~mv2.png" alt="San Francisco Giants"></div>
+      <div class="dup" aria-hidden="true"><img src="https://static.wixstatic.com/media/fe5d44_5dc895f8a4c54c41ad46d9943d3f7b7d~mv2.png" alt="Oakland Athletics"></div>
+      </div>
     </div>
   </div>
 </section>
