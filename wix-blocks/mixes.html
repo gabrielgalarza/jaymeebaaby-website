@@ -26,15 +26,14 @@
     url   — YouTube or Vimeo links play inline; IG/TikTok open in a new tab;
             "" leaves the card as a plain photo.
 
-  Lanes with no entries hide themselves, so this is safe to paste before
-  every URL is filled in. NOTE: that means the Lover Girl R&B lane stays
-  INVISIBLE until you add at least one entry to SERIES[].
+  The SoundCloud and Lover Girl lanes are live and need no setup. The party
+  lane still has url:"" on each card — add links and the play badges appear.
+  A lane with no entries hides itself.
 
   ── HEIGHT ───────────────────────────────────────────────────────────
-  Measured 1359px at 1280 wide, 1911px at 400 wide, with the series lane
-  hidden. Set the Wix element to 1450px desktop / 2000px mobile, then add
-  roughly 420px desktop / 1250px mobile once the series lane has a row
-  of three. Re-check after filling it in.
+  Measured 2098px at 1280 wide, 3555px at 400 wide, with all three lanes live.
+  Set the Wix element to 2200px desktop / 3700px mobile.
+  Each extra row of cards adds roughly 330px desktop / 380px mobile.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,7 +168,7 @@
         <p>The R&amp;B series, episode by episode.</p>
       </div>
       <a class="more" id="yt-link" target="_blank" rel="noopener">
-        Subscribe<svg viewBox="0 0 15 11" fill="none" aria-hidden="true"><path d="M1 5.5h12M9 1l4 4.5-4 4.5"
+        Watch the series<svg viewBox="0 0 15 11" fill="none" aria-hidden="true"><path d="M1 5.5h12M9 1l4 4.5-4 4.5"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
     <div class="grid" id="series"></div>
@@ -208,13 +207,26 @@
 /* ═══ EDIT HERE ═══════════════════════════════════════════════════════ */
 
 /* Her YouTube channel. Leave "" and the Subscribe link + YouTube chip stay hidden. */
-var YT_CHANNEL = "";
+var YT_CHANNEL = "https://www.youtube.com/@DJJaymeebaaby";
 
-/* Lover Girl R&B episodes */
+/* Lover Girl R&B episodes — pulled from the LOVER GIRL R&B MIX playlist */
+var SERIES_PLAYLIST = "https://www.youtube.com/playlist?list=PLJJVqSUI0VOM";
 var SERIES = [
-  // { title:"Lover Girl R&B — Vol. 1", meta:"Episode 1",
-  //   thumb:"https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg",
-  //   url:"https://youtu.be/VIDEO_ID" },
+  { title:"Lover Girl R&amp;B Mix Vol. 1", meta:"33:11 &middot; SZA, Summer Walker, Kehlani, Jhen&eacute; Aiko, Jacquees",
+    thumb:"https://img.youtube.com/vi/_GPJ_bjoPTo/maxresdefault.jpg",
+    url:"https://youtu.be/_GPJ_bjoPTo" },
+  { title:"Lover Girl R&amp;B Mix Vol. 2", meta:"37:01 &middot; Mariah Carey, SZA, Jhen&eacute; Aiko, Mary J",
+    thumb:"https://img.youtube.com/vi/EBJUhLL4gKc/maxresdefault.jpg",
+    url:"https://youtu.be/EBJUhLL4gKc" },
+  { title:"Lover Girl R&amp;B Mix Vol. 3", meta:"33:09 &middot; Summer Walker, Jamie Foxx, Kehlani, Daniel Caesar",
+    thumb:"https://img.youtube.com/vi/owJYHXCCTSU/maxresdefault.jpg",
+    url:"https://youtu.be/owJYHXCCTSU" },
+  { title:"Lover Girl R&amp;B Mix Vol. 4", meta:"42:03 &middot; Beyonc&eacute;, Alicia Keys, Brandy, Janet Jackson",
+    thumb:"https://img.youtube.com/vi/9cIuB24GMg4/maxresdefault.jpg",
+    url:"https://youtu.be/9cIuB24GMg4" },
+  { title:"Lover Girl R&amp;B Mix Vol. 5", meta:"40:03 &middot; 2000s R&amp;B — Ashanti, 112, Nelly, Miguel",
+    thumb:"https://img.youtube.com/vi/uGhywiI4rCM/maxresdefault.jpg",
+    url:"https://youtu.be/uGhywiI4rCM" }
 ];
 
 /* Party & event sets */
@@ -252,7 +264,8 @@ function fill(mountId, sectionId, items, numbered){
     if (it.url) { btn.type = "button"; btn.setAttribute("aria-label", "Play " + it.title); }
     btn.innerHTML =
       (numbered ? '<span class="ep">Ep. ' + (n + 1) + '</span>' : '') +
-      '<img src="' + it.thumb + '" alt="' + it.title + '">' +
+      '<img src="' + it.thumb + '" alt="' + it.title +
+        '" onerror="if(this.src.indexOf(\'maxresdefault\')>-1){this.src=this.src.replace(\'maxresdefault\',\'hqdefault\')}">' +
       '<span class="play"><i></i></span>';
     if (it.url) {
       btn.addEventListener("click", function(){
@@ -273,11 +286,16 @@ function fill(mountId, sectionId, items, numbered){
   });
 }
 
-if (YT_CHANNEL) {
-  var a = document.getElementById("yt-link");  a.href = YT_CHANNEL;
-  var f = document.getElementById("yt-follow"); f.href = YT_CHANNEL; f.hidden = false;
+var ytLink = document.getElementById("yt-link");
+if (typeof SERIES_PLAYLIST === "string" && SERIES_PLAYLIST) {
+  ytLink.href = SERIES_PLAYLIST;
+} else if (YT_CHANNEL) {
+  ytLink.href = YT_CHANNEL;
 } else {
-  document.getElementById("yt-link").style.display = "none";
+  ytLink.style.display = "none";
+}
+if (YT_CHANNEL) {
+  var f = document.getElementById("yt-follow"); f.href = YT_CHANNEL; f.hidden = false;
 }
 
 fill("series", "sec-series", SERIES, true);
