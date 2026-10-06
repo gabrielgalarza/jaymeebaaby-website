@@ -30,8 +30,9 @@
   page is never empty. Replace them as real clips come in.
 
   ── HEIGHT ─────────────────────────────────────────────────────────
-  Measured 1072px at 1280 wide, 1674px at 400 wide (4 entries).
-  Set the Wix element to 1150px desktop / 1760px mobile.
+  Measured 1072px at 1280 wide, 835px at 400 wide (4 entries).
+  Set the Wix element to 1150px desktop / 900px mobile.
+  Phones get one drifting row, so extra entries barely change the mobile height.
   Three cards per row on desktop, so the height grows by ~330px desktop /
   ~380px mobile for every extra row of entries. Re-check after adding.
 
@@ -80,9 +81,24 @@
   .filters button:focus-visible{outline:3px solid var(--violet);outline-offset:2px;}
 
   /* grid */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:12px;}
-  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:560px){.grid{grid-template-columns:1fr;}}
+  .grid{padding-bottom:12px;}
+
+  /* Phone: card rows drift sideways instead of stacking */
+  .vtrack{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .vtrack .dup{display:none;}
+  @media (max-width:900px){.vtrack{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:620px){
+    .grid{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);
+      mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);}
+    .grid::-webkit-scrollbar{display:none;}
+    .vtrack{display:flex;gap:14px;width:max-content;animation:drift 52s linear infinite;}
+    .vtrack .dup{display:flex;}
+    .card{flex:0 0 min(78vw,320px);}
+  }
+  @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .marq:hover,.marq:focus-within{animation-play-state:paused;}
+  @media (prefers-reduced-motion:reduce){.marq{animation:none!important;}}
 
   .card{display:flex;flex-direction:column;gap:11px;min-width:0;}
   .shot{position:relative;border-radius:6px;overflow:hidden;background:var(--ink);
@@ -188,39 +204,57 @@ function embedUrl(u){
 
 var grid = document.getElementById("grid"), empty = document.getElementById("empty");
 
+
+/* A moving row is hard to tap, so the first press parks it. */
+function parkOnTouch(track){
+  (track.parentElement || track).addEventListener("pointerdown", function(){
+    track.style.animationPlayState = "paused";
+  }, { passive:true });
+}
+
+function buildCard(it, isDup){
+  var card = document.createElement("div");
+  card.className = "card" + (it.url ? " playable" : "") + (isDup ? " dup" : "");
+  if (isDup) card.setAttribute("aria-hidden", "true");
+  var btn = document.createElement(it.url ? "button" : "div");
+  btn.className = "shot";
+  if (it.url) {
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Play " + it.title);
+    if (isDup) btn.tabIndex = -1;
+  }
+  btn.innerHTML =
+    '<span class="tag">' + LABEL[it.type] + '</span>' +
+    '<img src="' + it.thumb + '" alt="' + it.title + '">' +
+    '<span class="play"><i></i></span>';
+  if (it.url) {
+    btn.addEventListener("click", function(){
+      var e = embedUrl(it.url);
+      if (e) {
+        btn.innerHTML = '<iframe src="' + e + '" title="' + it.title +
+          '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+      } else {
+        window.open(it.url, "_blank", "noopener");
+      }
+    });
+  }
+  var meta = document.createElement("div");
+  meta.className = "meta";
+  meta.innerHTML = "<b>" + it.title + "</b><span>" + it.meta + "</span>";
+  card.appendChild(btn); card.appendChild(meta);
+  return card;
+}
+
 function render(filter){
   grid.innerHTML = "";
-  var shown = 0;
-  ITEMS.forEach(function(it){
-    if (filter !== "all" && it.type !== filter) return;
-    shown++;
-    var card = document.createElement("div");
-    card.className = "card" + (it.url ? " playable" : "");
-    var btn = document.createElement(it.url ? "button" : "div");
-    btn.className = "shot";
-    if (it.url) { btn.type = "button"; btn.setAttribute("aria-label", "Play " + it.title); }
-    btn.innerHTML =
-      '<span class="tag">' + LABEL[it.type] + '</span>' +
-      '<img src="' + it.thumb + '" alt="' + it.title + '">' +
-      '<span class="play"><i></i></span>';
-    if (it.url) {
-      btn.addEventListener("click", function(){
-        var e = embedUrl(it.url);
-        if (e) {
-          btn.innerHTML = '<iframe src="' + e + '" title="' + it.title +
-            '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
-        } else {
-          window.open(it.url, "_blank", "noopener");
-        }
-      });
-    }
-    var meta = document.createElement("div");
-    meta.className = "meta";
-    meta.innerHTML = "<b>" + it.title + "</b><span>" + it.meta + "</span>";
-    card.appendChild(btn); card.appendChild(meta);
-    grid.appendChild(card);
-  });
-  empty.hidden = shown > 0;
+  var shown = ITEMS.filter(function(it){ return filter === "all" || it.type === filter; });
+  var track = document.createElement("div");
+  track.className = "vtrack marq";
+  shown.forEach(function(it){ track.appendChild(buildCard(it, false)); });
+  shown.forEach(function(it){ track.appendChild(buildCard(it, true)); });
+  grid.appendChild(track);
+  parkOnTouch(track);
+  empty.hidden = shown.length > 0;
 }
 
 (function buildFilters(){

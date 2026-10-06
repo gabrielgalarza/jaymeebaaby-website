@@ -31,9 +31,10 @@
   A lane with no entries hides itself.
 
   ── HEIGHT ───────────────────────────────────────────────────────────
-  Measured 2377px at 1280 wide, 4098px at 400 wide, with all three lanes live.
-  Set the Wix element to 2480px desktop / 4250px mobile.
-  Each extra row of cards adds roughly 330px desktop / 380px mobile.
+  Measured 2377px at 1280 wide, 1862px at 400 wide, with all three lanes live.
+  Set the Wix element to 2480px desktop / 1950px mobile.
+  Phones get one drifting row per lane, so extra entries barely change the
+  mobile height; on desktop each extra row of three adds roughly 330px.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,9 +85,23 @@
   @media (max-width:560px){.sc iframe{height:360px;}}
 
   /* video cards */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:560px){.grid{grid-template-columns:1fr;}}
+
+  /* Phone: card rows drift sideways instead of stacking */
+  .vtrack{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .vtrack .dup{display:none;}
+  @media (max-width:900px){.vtrack{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:620px){
+    .grid{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);
+      mask-image:linear-gradient(90deg,transparent,#000 18px,#000 calc(100% - 18px),transparent);}
+    .grid::-webkit-scrollbar{display:none;}
+    .vtrack{display:flex;gap:14px;width:max-content;animation:drift 52s linear infinite;}
+    .vtrack .dup{display:flex;}
+    .card{flex:0 0 min(78vw,320px);}
+  }
+  @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .marq:hover,.marq:focus-within{animation-play-state:paused;}
+  @media (prefers-reduced-motion:reduce){.marq{animation:none!important;}}
   .card{display:flex;flex-direction:column;gap:10px;min-width:0;}
   .shot{position:relative;border-radius:6px;overflow:hidden;background:var(--ink);
     aspect-ratio:16/9;width:100%;border:0;padding:0;display:block;cursor:default;}
@@ -258,38 +273,57 @@ function embedUrl(u){
   return null;
 }
 
+function buildCard(it, n, numbered, isDup){
+  var card = document.createElement("div");
+  card.className = "card" + (it.url ? " playable" : "") + (isDup ? " dup" : "");
+  if (isDup) card.setAttribute("aria-hidden", "true");
+  var btn = document.createElement(it.url ? "button" : "div");
+  btn.className = "shot";
+  if (it.url) {
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Play " + it.title);
+    if (isDup) btn.tabIndex = -1;
+  }
+  btn.innerHTML =
+    (numbered ? '<span class="ep">Ep. ' + (n + 1) + '</span>' : '') +
+    '<img src="' + it.thumb + '" alt="' + it.title +
+      '" onerror="if(this.src.indexOf(\'maxresdefault\')>-1){this.src=this.src.replace(\'maxresdefault\',\'hqdefault\')}">' +
+    '<span class="play"><i></i></span>';
+  if (it.url) {
+    btn.addEventListener("click", function(){
+      var e = embedUrl(it.url);
+      if (e) {
+        btn.innerHTML = '<iframe src="' + e + '" title="' + it.title +
+          '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+      } else {
+        window.open(it.url, "_blank", "noopener");
+      }
+    });
+  }
+  var meta = document.createElement("div");
+  meta.className = "meta";
+  meta.innerHTML = "<b>" + it.title + "</b><span>" + it.meta + "</span>";
+  card.appendChild(btn); card.appendChild(meta);
+  return card;
+}
+
+/* A moving row is hard to tap, so the first press parks it. */
+function parkOnTouch(track){
+  (track.parentElement || track).addEventListener("pointerdown", function(){
+    track.style.animationPlayState = "paused";
+  }, { passive:true });
+}
+
 function fill(mountId, sectionId, items, numbered){
   var mount = document.getElementById(mountId);
   if (!items.length) return;
   document.getElementById(sectionId).hidden = false;
-  items.forEach(function(it, n){
-    var card = document.createElement("div");
-    card.className = "card" + (it.url ? " playable" : "");
-    var btn = document.createElement(it.url ? "button" : "div");
-    btn.className = "shot";
-    if (it.url) { btn.type = "button"; btn.setAttribute("aria-label", "Play " + it.title); }
-    btn.innerHTML =
-      (numbered ? '<span class="ep">Ep. ' + (n + 1) + '</span>' : '') +
-      '<img src="' + it.thumb + '" alt="' + it.title +
-        '" onerror="if(this.src.indexOf(\'maxresdefault\')>-1){this.src=this.src.replace(\'maxresdefault\',\'hqdefault\')}">' +
-      '<span class="play"><i></i></span>';
-    if (it.url) {
-      btn.addEventListener("click", function(){
-        var e = embedUrl(it.url);
-        if (e) {
-          btn.innerHTML = '<iframe src="' + e + '" title="' + it.title +
-            '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
-        } else {
-          window.open(it.url, "_blank", "noopener");
-        }
-      });
-    }
-    var meta = document.createElement("div");
-    meta.className = "meta";
-    meta.innerHTML = "<b>" + it.title + "</b><span>" + it.meta + "</span>";
-    card.appendChild(btn); card.appendChild(meta);
-    mount.appendChild(card);
-  });
+  var track = document.createElement("div");
+  track.className = "vtrack marq";
+  items.forEach(function(it, n){ track.appendChild(buildCard(it, n, numbered, false)); });
+  items.forEach(function(it, n){ track.appendChild(buildCard(it, n, numbered, true)); });
+  mount.appendChild(track);
+  parkOnTouch(track);
 }
 
 var ytLink = document.getElementById("yt-link");
