@@ -8,8 +8,8 @@
   WIX EMBED BLOCK — Corporate & Brand Activations   (v3)
   ======================================================
   Paste into: Wix Editor > Add > Embed Code > Embed HTML > "Code" mode.
-  HEIGHT — measured 2684px at 1280 wide, 2755px at 400 wide.
-  Set the Wix element to 2780px desktop / 2860px mobile.
+  HEIGHT — measured 2684px at 1280 wide, 2667px at 400 wide.
+  Set the Wix element to 2780px desktop / 2770px mobile.
   Overshooting is safe — the body background matches the final violet band, so
   extra height reads as that band continuing. Only undershooting clips.
   Re-check after swapping photos.
@@ -131,7 +131,8 @@
     .logos:hover .track,.logos:focus-within .track{animation-play-state:paused;}
   }
   @keyframes drift{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-  @media (prefers-reduced-motion:reduce){.track{animation:none!important;}}
+  .marq:hover,.marq:focus-within{animation-play-state:paused;}
+  @media (prefers-reduced-motion:reduce){.marq{animation:none!important;}}
 
   /* ══ SERVICES — equal cards on a snap carousel ══ */
   .sec-bar{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
@@ -194,9 +195,20 @@
   .tile:focus-visible{outline:3px solid var(--violet);outline-offset:3px;}
   @media (max-width:620px){.tile{flex:0 0 78%;}}
 
-  .roster{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
-  .roster span{font-size:13px;font-weight:700;color:var(--muted);background:var(--paper);
+  .roster{margin-top:18px;}
+  .rtrack{display:flex;flex-wrap:wrap;gap:8px;}
+  .rtrack .dup{display:none;}
+  .rtrack span{font-size:13px;font-weight:700;color:var(--muted);background:var(--paper);
     border:1px solid var(--line);border-radius:999px;padding:7px 14px;}
+  @media (max-width:620px){
+    .roster{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+      -webkit-mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent);
+      mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent);}
+    .roster::-webkit-scrollbar{display:none;}
+    .rtrack{flex-wrap:nowrap;width:max-content;animation:drift 24s linear infinite;}
+    .rtrack .dup{display:block;}
+    .rtrack span{flex:0 0 auto;white-space:nowrap;}
+  }
 
   /* ══ CTA ══ */
   .cta{background:var(--violet);color:#fff;}
@@ -243,7 +255,7 @@
       <h3>Brands and teams she&rsquo;s already worked with.</h3>
     </div>
     <div class="logos">
-      <div class="track">
+      <div class="track marq">
       <div><img src="https://static.wixstatic.com/media/fe5d44_3645928bc93f435d9ecf15543109dd8b~mv2.png" alt="Adobe"></div>
       <div><img src="https://static.wixstatic.com/media/fe5d44_d0c1b1a29fba45cdb05f895f6b2644ca~mv2.png" alt="Salesforce"></div>
       <div><img src="https://static.wixstatic.com/media/fe5d44_13dd017b29ec4efdbc2f9dfe85a22591~mv2.webp" alt="LinkedIn"></div>
@@ -390,9 +402,12 @@
     </div>
 
     <div class="roster">
+      <div class="rtrack marq">
       <span>Bay FC</span><span>NWSL Championship 2025</span>
       <span>NFL Flag International Championship 2026</span>
       <span>LPGA Hanwha LIFEPLUS International Crown</span>
+        <span class="dup" aria-hidden="true">Bay FC</span><span class="dup" aria-hidden="true">NWSL Championship 2025</span><span class="dup" aria-hidden="true">NFL Flag International Championship 2026</span><span class="dup" aria-hidden="true">LPGA Hanwha LIFEPLUS International Crown</span>
+      </div>
     </div>
   </div>
 </section>
