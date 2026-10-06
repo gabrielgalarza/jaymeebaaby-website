@@ -16,7 +16,7 @@
   Everything on this page is driven by the ITEMS list at the bottom of
   this file. One entry per example:
 
-      { type:"wedding",   // "wedding" or "private" — drives the filter
+      { type:"wedding",   // "wedding" or "event" — drives the filter
         title:"...",      // what shows on the card
         meta:"...",       // venue, brand, month/year
         thumb:"https://static.wixstatic.com/...",   // Wix Media Manager > Copy URL
@@ -30,8 +30,8 @@
   page is never empty. Replace them as real clips come in.
 
   ── HEIGHT ─────────────────────────────────────────────────────────
-  Measured 758px at 1280 wide, 1393px at 400 wide (3 entries).
-  Set the Wix element to 820px desktop / 1470px mobile.
+  Measured 1072px at 1280 wide, 1674px at 400 wide (4 entries).
+  Set the Wix element to 1150px desktop / 1760px mobile.
   Three cards per row on desktop, so the height grows by ~330px desktop /
   ~380px mobile for every extra row of entries. Re-check after adding.
 
@@ -166,15 +166,17 @@ var ITEMS = [
     url:"" },
   { type:"wedding", title:"Outdoor reception", meta:"Bay Area",
     thumb:"https://static.wixstatic.com/media/6426b8_946a4f88181148b681df1f92e50a83f4~mv2.jpg",
+    url:"" },
+  { type:"event", title:"Bally&rsquo;s Lake Tahoe", meta:"Headline billing &middot; BLU Nightclub",
+    thumb:"https://gabrielgalarza.github.io/jaymeebaaby-website/images/ballys-lake-tahoe.jpg",
     url:"" }
-  // Private events need photos — add entries with type:"private" and the
-  // "Private events" filter appears on its own.
+  // Add more with type:"event" — birthdays, anniversaries, milestones, venue dates.
 ];
 
 /* ═══ nothing below needs editing ═══ */
 
-var LABEL = { wedding:"Wedding", private:"Private event" };
-var PLURAL = { wedding:"Weddings", private:"Private events" };
+var LABEL = { wedding:"Wedding", event:"Event" };
+var PLURAL = { wedding:"Weddings", event:"Events" };
 
 function embedUrl(u){
   var m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
